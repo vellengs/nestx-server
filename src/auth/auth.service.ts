@@ -11,7 +11,7 @@ import { JwtPayload } from './interfaces/jwt-payload.interface';
 import { JWT_OPTIONS } from './auth.constants';
 import { JwtOptions } from './interfaces/jwt-options.interface';
 import { LoginUserDto } from './dto/login-user.dto';
-import { User } from '../core/interface/user.interface';
+import { User } from '../core/interfaces/user.interface';
 
 @Injectable()
 export class AuthService {

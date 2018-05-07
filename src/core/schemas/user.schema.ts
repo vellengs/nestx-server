@@ -30,9 +30,8 @@
 // }, option);
 
 
-import * as mongoose from 'mongoose';
-
-export const schema = new mongoose.Schema({
+import { Schema } from 'mongoose';
+export const schema = new Schema({
     name: String,
     age: Number,
     breed: String,

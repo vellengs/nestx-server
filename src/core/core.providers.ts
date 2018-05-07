@@ -20,7 +20,7 @@ export const coreProviders = [
   },
   {
     provide: 'LogModelToken',
-    useFactory: (connection: Connection) => connection.model('Menu', LogSchema),
+    useFactory: (connection: Connection) => connection.model('Log', LogSchema),
     inject: ['DbConnectionToken'],
   },
   {

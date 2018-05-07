@@ -15,4 +15,17 @@ export class UsersService {
   async findAll(): Promise<User[]> {
     return await this.model.find().exec();
   }
+
+
+  /**
+   * 查询一个帐号
+   */
+  async findOne(conditions?: any): Promise<User> {
+    return await this.model.findOne(conditions).exec();
+  }
+
+  async test(): Promise<string> {
+    return 'test';
+  }
+
 }

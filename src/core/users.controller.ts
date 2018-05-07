@@ -17,9 +17,8 @@ export class UsersController {
     return this.usersService.findAll();
   }
 
-
   @Get('hello')
-  root(): string {
-    return 'Hello World!';
+  async test(): Promise<string> {
+    return await this.usersService.test();
   }
 }

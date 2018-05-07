@@ -4,6 +4,12 @@
       {
         "type": "node",
         "request": "launch",
+        "name": "Node start",
+        "program": "${workspaceFolder}/dist/main.js"
+      },
+      {
+        "type": "node",
+        "request": "launch",
         "name": "Jest All",
         "program": "${workspaceFolder}/node_modules/jest/bin/jest",
         "args": ["--runInBand"],
