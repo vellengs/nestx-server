@@ -5,13 +5,13 @@ import {
   NotFoundException,
   UnauthorizedException,
 } from '@nestjs/common';
-import { UsersService } from '../users/users.service';
-import { CryptoService } from '../crypto/crypto.service';
+import { UsersService } from '../core/users.service';
+import { CryptoService } from '../core/crypto/crypto.service';
 import { JwtPayload } from './interfaces/jwt-payload.interface';
 import { JWT_OPTIONS } from './auth.constants';
 import { JwtOptions } from './interfaces/jwt-options.interface';
 import { LoginUserDto } from './dto/login-user.dto';
-import { User } from '../users/interface/user.interface';
+import { User } from '../core/interface/user.interface';
 
 @Injectable()
 export class AuthService {
