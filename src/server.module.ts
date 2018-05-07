@@ -7,7 +7,6 @@ import { CoreModule } from './core/core.module';
 
 @Module({
   imports: [TypeOrmModule.forRoot(), CoreModule, CmsModule],
-  controllers: [],
-  providers: [EventsGateway]
+  providers: [EventsGateway,]
 })
 export class ApplicationModule { }

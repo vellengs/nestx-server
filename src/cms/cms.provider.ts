@@ -5,7 +5,7 @@ export const CoreProviders = [
   {
     provide: 'CmsModelToken',
     useFactory: (connection: Connection) => {
-      connection.model('User', CategorySchema);
+      connection.model('Category', CategorySchema);
     },
     inject: ['DbConnectionToken'],
   },

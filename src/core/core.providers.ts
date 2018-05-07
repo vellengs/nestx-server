@@ -6,17 +6,36 @@ import { schema as LogSchema } from './schemas/log.schema';
 import { schema as DictSchema } from './schemas/dict.schema';
 import { schema as SettingSchema } from './schemas/setting.schema';
 
-export const CoreProviders = [
+
+export const coreProviders = [
   {
     provide: 'UserModelToken',
-    useFactory: (connection: Connection) => {
-      connection.model('User', UserSchema);
-      connection.model('Role', RoleSchema);
-      connection.model('Menu', MenuSchema);
-      connection.model('Log', LogSchema);
-      connection.model('Dict', DictSchema);
-      connection.model('Setting', SettingSchema);
-    },
+    useFactory: (connection: Connection) => connection.model('User', UserSchema),
     inject: ['DbConnectionToken'],
   },
+  {
+    provide: 'RoleModelToken',
+    useFactory: (connection: Connection) => connection.model('Role', RoleSchema),
+    inject: ['DbConnectionToken'],
+  },
+  {
+    provide: 'LogModelToken',
+    useFactory: (connection: Connection) => connection.model('Menu', LogSchema),
+    inject: ['DbConnectionToken'],
+  },
+  {
+    provide: 'MenuModelToken',
+    useFactory: (connection: Connection) => connection.model('Menu', MenuSchema),
+    inject: ['DbConnectionToken'],
+  },
+  {
+    provide: 'DictModelToken',
+    useFactory: (connection: Connection) => connection.model('Dict', DictSchema),
+    inject: ['DbConnectionToken'],
+  },
+  {
+    provide: 'SettingModelToken',
+    useFactory: (connection: Connection) => connection.model('Setting', SettingSchema),
+    inject: ['DbConnectionToken'],
+  }
 ];
