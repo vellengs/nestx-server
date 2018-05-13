@@ -9,7 +9,9 @@ const setting_schema_1 = require("./schemas/setting.schema");
 exports.coreProviders = [
     {
         provide: 'UserModelToken',
-        useFactory: (connection) => connection.model('User', user_schema_1.schema),
+        useFactory: (connection) => {
+            return connection.model('User', user_schema_1.schema);
+        },
         inject: ['DbConnectionToken'],
     },
     {

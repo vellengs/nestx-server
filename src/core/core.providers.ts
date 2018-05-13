@@ -10,7 +10,9 @@ import { schema as SettingSchema } from './schemas/setting.schema';
 export const coreProviders = [
   {
     provide: 'UserModelToken',
-    useFactory: (connection: Connection) => connection.model('User', UserSchema),
+    useFactory: (connection: Connection) => {
+      return connection.model('User', UserSchema)
+    },
     inject: ['DbConnectionToken'],
   },
   {

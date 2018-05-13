@@ -8,11 +8,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const mongoose_1 = require("mongoose");
+const mongoose = require("mongoose");
 exports.databaseProviders = [
     {
         provide: 'DbConnectionToken',
-        useFactory: () => __awaiter(this, void 0, void 0, function* () { return yield mongoose_1.connect('mongodb://localhost/typerx'); }),
+        useFactory: () => __awaiter(this, void 0, void 0, function* () { return yield mongoose.connect('mongodb://localhost/nest'); }),
     },
 ];
 //# sourceMappingURL=database.providers.js.map
