@@ -10,16 +10,13 @@ export class UsersService {
   async create(createCatDto: CreateUserDto): Promise<User> {
     const instance = new this.model(createCatDto);
     return await instance.save();
+
   }
 
   async findAll(): Promise<User[]> {
     return await this.model.find().exec();
   }
 
-
-  /**
-   * 查询一个帐号
-   */
   async findOne(conditions?: any): Promise<User> {
     return await this.model.findOne(conditions).exec();
   }
