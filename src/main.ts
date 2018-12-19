@@ -4,12 +4,12 @@ import { ApplicationModule } from './server.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(ApplicationModule);
-
+  app.setGlobalPrefix('api');
+  
   const options = new DocumentBuilder()
     .setTitle('nestx backend')
     .setDescription('The nestx backend API description')
     .setVersion('1.0')
-    .addTag('nestx')
     .addBearerAuth()
     .build();
   const document = SwaggerModule.createDocument(app, options);

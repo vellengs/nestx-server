@@ -4,7 +4,6 @@ import { NestApplication, NestApplicationContext } from '@nestjs/core';
 import { Type } from '@nestjs/common/interfaces/type.interface';
 import { INestApplication, INestMicroservice } from '@nestjs/common';
 import { MicroserviceOptions } from '@nestjs/common/interfaces/microservices/microservice-configuration.interface';
-import { MicroservicesPackageNotFoundException } from '@nestjs/core/errors/exceptions/microservices-package-not-found.exception';
 import { ApplicationConfig } from '@nestjs/core/application-config';
 import { HttpServer } from '@nestjs/common';
 import { ExpressFactory } from '@nestjs/core/adapters/express-factory';
@@ -55,9 +54,6 @@ export class TestingModule extends NestApplicationContext {
   public createNestMicroservice(
     options: MicroserviceOptions,
   ): INestMicroservice {
-    if (!NestMicroservice) {
-      throw new MicroservicesPackageNotFoundException();
-    }
     return new NestMicroservice(
       this.container,
       options,
