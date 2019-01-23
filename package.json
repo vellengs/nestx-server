@@ -20,19 +20,25 @@
     "url": "git+https://github.com/vellengs/nestx-server.git"
   },
   "scripts": {
-    "format": "prettier --write \"**/*.ts\"",
+    "build": "tsc -p tsconfig.build.json",
+    "format": "prettier --write \"src/**/*.ts\"",
     "start": "ts-node -r tsconfig-paths/register src/main.ts",
     "start:dev": "nodemon",
-    "prestart:prod": "rm -rf dist && tsc",
+    "start:debug": "nodemon --config nodemon-debug.json",
+    "prestart:prod": "rimraf dist && npm run build",
     "start:prod": "node dist/main.js",
+    "lint": "tslint -p tsconfig.json -c tslint.json",
     "test": "jest",
+    "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
+    "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "dependencies": {
     "@nestjs/common": "^5.5.0",
     "@nestjs/core": "^5.5.0",
-    "@nestjs/passport": "^1.0.6",
+    "@nestjs/jwt": "^0.2.1",
+    "@nestjs/passport": "^5.1.0",
     "@nestjs/swagger": "^2.5.1",
     "@nestjs/testing": "^5.5.0",
     "@nestjs/typeorm": "^2.1.0",

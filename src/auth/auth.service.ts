@@ -1,65 +1,38 @@
-import * as jwt from 'jsonwebtoken';
-import {
-  Injectable,
-  Inject,
-  NotFoundException,
-  UnauthorizedException,
-} from '@nestjs/common';
-import { UsersService } from '../core/users.service';
-import { CryptoService } from '../core/crypto/crypto.service';
-import { JwtPayload } from './interfaces/jwt-payload.interface';
-import { JWT_OPTIONS } from './auth.constants';
-import { JwtOptions } from './interfaces/jwt-options.interface';
-import { LoginUserDto } from './dto/login-user.dto';
-import { User } from '../core/interfaces/user.interface';
+import { Injectable } from '@nestjs/common';
+import { JwtService } from '@nestjs/jwt';
+import { JwtPayload, Token } from './interfaces/jwt-payload.interface';
+import { LoginDto } from './dto/login.dto';
+import { RegisterDto } from './dto/Register.dto';
+// import { User, UsersService } from './../user';
 
 @Injectable()
 export class AuthService {
-  constructor(
-    @Inject(JWT_OPTIONS) private readonly jwtOptions: JwtOptions,
-    private readonly cryptoService: CryptoService,
-    private readonly usersService: UsersService,
-  ) { }
+  constructor(private readonly jwtService: JwtService) { }
 
-  async createToken(loginUserDto: LoginUserDto) {
-    const { id, username } = await this.validateLoginUserDto(loginUserDto);
-    const { expiresIn, secret } = this.jwtOptions;
-
-    const token = jwt.sign({ id, username }, secret, {
-      expiresIn,
-    });
+  async createToken(payload: LoginDto): Promise<Token> {
+    const accessToken = this.jwtService.sign({ email: payload.username });
     return {
-      expires_in: expiresIn,
-      access_token: token,
+      expiresIn: 3600,
+      accessToken,
     };
   }
 
-  async validateLoginUserDto(loginUserDto: LoginUserDto): Promise<User> {
-    const { password, username } = loginUserDto;
-    const user = await this.usersService.findOne({ username });
-    const isValid = await this.cryptoService.compare(password, user.password);
-
-    if (!isValid) {
-      throw new UnauthorizedException();
-    }
-    return user;
+  async register(payload: RegisterDto): Promise<any> { 
+    return {};
   }
 
-  async validateUserPayload(payload: JwtPayload): Promise<User> {
-    const { username, id } = payload;
-    try {
-      const user = await this.usersService.findOne({ id });
-      return user.username === username ? user : null;
-    } catch {
-      return null;
-    }
-  }
+  async validateUser(payload: JwtPayload): Promise<any> {
 
-  validateToken(token: string): JwtPayload {
-    try {
-      return jwt.verify(token, this.jwtOptions.secret) as JwtPayload;
-    } catch {
-      return null;
-    }
+    // const user = await this.userService.getByEmail(payload.email);
+    // if (!user) {
+    //   throw new UnauthorizedException('Wrong login combination!');
+    // }
+
+    // if (!user.validate(payload.password)) {
+    //   throw new UnauthorizedException('Wrong login combination!');
+    // }
+    // return user;
+
+    return {};
   }
 }

@@ -1,4 +1,8 @@
 export interface JwtPayload {
-  id: number;
-  username: string;
+  email: string;
+}
+
+export interface Token {
+  expiresIn: number;
+  accessToken: string;
 }

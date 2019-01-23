@@ -20,7 +20,7 @@ import { ParseIntPipe } from '../common/pipes/parse-int.pipe';
 @UseGuards(RolesGuard)
 @UseInterceptors(LoggingInterceptor, TransformInterceptor)
 export class CatsController {
-  constructor(private readonly catsService: CatsService) {}
+  constructor(private readonly catsService: CatsService) { }
 
   @Post()
   @Roles('admin')
@@ -36,7 +36,7 @@ export class CatsController {
   @Get(':id')
   findOne(
     @Param('id', new ParseIntPipe())
-    id,
+    id: number,
   ) {
     // logic
   }
