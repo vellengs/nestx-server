@@ -5,6 +5,7 @@ import { setupSwagger } from './swagger';
 import * as compression from 'compression';
 import * as csurf from 'csurf';
 import * as rateLimit from 'express-rate-limit';
+import * as helmet from 'helmet';
 
 
 // import * as fs from 'fs';
@@ -25,6 +26,7 @@ async function bootstrap() {
   app.setGlobalPrefix('api');
   setupSwagger(app);
   app.enableCors();
+  app.use(helmet());
   app.useGlobalPipes(new ValidationPipe());
   app.use(compression());
   await app.listen(3600);
