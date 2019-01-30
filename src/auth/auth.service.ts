@@ -17,8 +17,12 @@ export class AuthService {
     };
   }
 
-  async register(payload: RegisterDto): Promise<any> { 
-    return {};
+  async register(payload: RegisterDto): Promise<any> {
+    return payload; // TODO
+  }
+
+  async findOneByToken() {
+
   }
 
   async validateUser(payload: JwtPayload): Promise<any> {
