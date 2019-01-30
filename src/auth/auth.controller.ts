@@ -13,7 +13,6 @@ export class AuthController {
   @Post('login')
   @ApiResponse({ status: 201, description: 'Successful Login' })
   @ApiResponse({ status: 400, description: 'Bad Request' })
-  @ApiResponse({ status: 401, description: 'Unauthorized' })
   async login(@Body() payload: LoginDto): Promise<Token> {
     const user = await this.authService.validateUser({ email: payload.username });
     return await this.authService.createToken(user);
@@ -22,7 +21,6 @@ export class AuthController {
   @Post('register')
   @ApiResponse({ status: 201, description: 'Successful Registration' })
   @ApiResponse({ status: 400, description: 'Bad Request' })
-  @ApiResponse({ status: 401, description: 'Unauthorized' })
   async register(@Body() payload: RegisterDto): Promise<any> {
     const user = await this.authService.register(payload);
     return await this.authService.createToken(user);
