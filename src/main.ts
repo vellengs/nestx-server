@@ -1,20 +1,24 @@
 import { NestFactory } from '@nestjs/core';
-import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { ApplicationModule } from './server.module';
+import { ValidationPipe } from '@nestjs/common';
+import * as fs from 'fs';
+import { setupSwagger } from './swagger';
+import * as compression from 'compression';
 
 async function bootstrap() {
-  const app = await NestFactory.create(ApplicationModule);
+  const app = await NestFactory.create(ApplicationModule,
+    {
+      httpsOptions: {
+        key: fs.readFileSync('ssl_private_key.pem'),
+        cert: fs.readFileSync('ssl_certificate.crt'),
+      },
+    }
+  );
   app.setGlobalPrefix('api');
-  
-  const options = new DocumentBuilder()
-    .setTitle('nestx backend')
-    .setDescription('The nestx backend API description')
-    .setVersion('1.0')
-    .addBearerAuth()
-    .build();
-  const document = SwaggerModule.createDocument(app, options);
-  SwaggerModule.setup('/docs', app, document);
-
+  setupSwagger(app);
+  app.enableCors();
+  app.useGlobalPipes(new ValidationPipe());
+  app.use(compression());
   await app.listen(3600);
 }
 bootstrap();

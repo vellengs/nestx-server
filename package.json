@@ -45,6 +45,7 @@
     "@nestjs/websockets": "^5.5.0",
     "class-transformer": "^0.1.10",
     "class-validator": "^0.8.5",
+    "compression": "^1.7.3",
     "copy-webpack-plugin": "^4.6.0",
     "core-js": "^2.6.1",
     "deprecate": "^1.1.0",

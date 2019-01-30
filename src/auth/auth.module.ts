@@ -4,9 +4,8 @@ import { PassportModule } from '@nestjs/passport';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 import { JwtStrategy } from './jwt.strategy';
-import { ConfigModule } from 'config/config.module';
-import { ConfigService } from 'config/config.service';
-
+import { ConfigModule } from './../config/config.module';
+import { ConfigService } from './../config/config.service';
 @Module({
   imports: [
     PassportModule.register({ defaultStrategy: 'jwt' }),
