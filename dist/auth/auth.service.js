@@ -8,9 +8,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var __param = (this && this.__param) || function (paramIndex, decorator) {
-    return function (target, key) { decorator(target, key, paramIndex); }
-};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
@@ -20,67 +17,39 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const jwt = require("jsonwebtoken");
 const common_1 = require("@nestjs/common");
-const users_service_1 = require("../core/users.service");
-const crypto_service_1 = require("../core/crypto/crypto.service");
-const auth_constants_1 = require("./auth.constants");
+const jwt_1 = require("@nestjs/jwt");
 let AuthService = class AuthService {
-    constructor(jwtOptions, cryptoService, usersService) {
-        this.jwtOptions = jwtOptions;
-        this.cryptoService = cryptoService;
-        this.usersService = usersService;
+    constructor(jwtService) {
+        this.jwtService = jwtService;
     }
-    createToken(loginUserDto) {
+    createToken(payload) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { id, username } = yield this.validateLoginUserDto(loginUserDto);
-            const { expiresIn, secret } = this.jwtOptions;
-            const token = jwt.sign({ id, username }, secret, {
-                expiresIn,
-            });
+            const accessToken = this.jwtService.sign({ email: payload.username });
             return {
-                expires_in: expiresIn,
-                access_token: token,
+                expiresIn: 3600,
+                accessToken,
             };
         });
     }
-    validateLoginUserDto(loginUserDto) {
+    register(payload) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { password, username } = loginUserDto;
-            const user = yield this.usersService.findOne({ username });
-            const isValid = yield this.cryptoService.compare(password, user.password);
-            if (!isValid) {
-                throw new common_1.UnauthorizedException();
-            }
-            return user;
+            return payload;
         });
     }
-    validateUserPayload(payload) {
+    findOneByToken() {
         return __awaiter(this, void 0, void 0, function* () {
-            const { username, id } = payload;
-            try {
-                const user = yield this.usersService.findOne({ id });
-                return user.username === username ? user : null;
-            }
-            catch (_a) {
-                return null;
-            }
         });
     }
-    validateToken(token) {
-        try {
-            return jwt.verify(token, this.jwtOptions.secret);
-        }
-        catch (_a) {
-            return null;
-        }
+    validateUser(payload) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return {};
+        });
     }
 };
 AuthService = __decorate([
     common_1.Injectable(),
-    __param(0, common_1.Inject(auth_constants_1.JWT_OPTIONS)),
-    __metadata("design:paramtypes", [Object, crypto_service_1.CryptoService,
-        users_service_1.UsersService])
+    __metadata("design:paramtypes", [jwt_1.JwtService])
 ], AuthService);
 exports.AuthService = AuthService;
 //# sourceMappingURL=auth.service.js.map

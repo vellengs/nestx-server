@@ -28,6 +28,7 @@ const roles_decorator_1 = require("../common/decorators/roles.decorator");
 const logging_interceptor_1 = require("../common/interceptors/logging.interceptor");
 const transform_interceptor_1 = require("../common/interceptors/transform.interceptor");
 const parse_int_pipe_1 = require("../common/pipes/parse-int.pipe");
+const enums_1 = require("./../config/enums");
 let CatsController = class CatsController {
     constructor(catsService) {
         this.catsService = catsService;
@@ -47,7 +48,7 @@ let CatsController = class CatsController {
 };
 __decorate([
     common_1.Post(),
-    roles_decorator_1.Roles('admin'),
+    roles_decorator_1.Roles(enums_1.RoleTypes.admin),
     __param(0, common_1.Body()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [create_cat_dto_1.CreateCatDto]),
@@ -63,7 +64,7 @@ __decorate([
     common_1.Get(':id'),
     __param(0, common_1.Param('id', new parse_int_pipe_1.ParseIntPipe())),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
+    __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", void 0)
 ], CatsController.prototype, "findOne", null);
 CatsController = __decorate([

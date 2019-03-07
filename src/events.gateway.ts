@@ -17,7 +17,7 @@ export class EventsGateway implements OnGatewayInit, OnGatewayConnection {
     }
 
     @SubscribeMessage('events')
-    onEvent(client, data): WsResponse<any> {
+    onEvent(client: any, data: any): WsResponse<any> {
         const event = 'events';
 
         const response = {

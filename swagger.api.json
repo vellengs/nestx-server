@@ -1,0 +1,90 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "nestx server is a simple REST API provider.",
+        "version": "0.0.1",
+        "title": "nestx server"
+    },
+    "basePath": "/",
+    "tags": [],
+    "schemes": ["https"],
+    "securityDefinitions": {
+        "bearer": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header"
+        }
+    },
+    "paths": {
+        "/": {
+            "get": {
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                },
+                "produces": ["application/json"],
+                "consumes": ["application/json"]
+            }
+        },
+        "/auth/login": {
+            "post": {
+                "parameters": [{
+                    "name": "LoginDto",
+                    "required": true,
+                    "in": "body",
+                    "schema": {
+                        "$ref": "#/definitions/LoginDto"
+                    }
+                }],
+                "responses": {
+                    "201": {
+                        "description": "Successful Login"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                },
+                "produces": ["application/json"],
+                "consumes": ["application/json"]
+            }
+        },
+        "/auth/register": {
+            "post": {
+                "parameters": [{
+                    "name": "RegisterDto",
+                    "required": true,
+                    "in": "body",
+                    "schema": {
+                        "$ref": "#/definitions/RegisterDto"
+                    }
+                }],
+                "responses": {
+                    "201": {
+                        "description": "Successful Registration"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                },
+                "produces": ["application/json"],
+                "consumes": ["application/json"]
+            }
+        }
+    },
+    "definitions": {
+        "LoginDto": {
+            "type": "object",
+            "properties": {
+                "password": {
+                    "type": "string"
+                }
+            },
+            "required": ["password"]
+        },
+        "RegisterDto": {
+            "type": "object",
+            "properties": {}
+        }
+    }
+}

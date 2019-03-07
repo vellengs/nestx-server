@@ -3,22 +3,13 @@ import { ApplicationModule } from './server.module';
 import { ValidationPipe } from '@nestjs/common';
 import { setupSwagger } from './swagger';
 import * as compression from 'compression';
-import * as csurf from 'csurf';
 import * as rateLimit from 'express-rate-limit';
 import * as helmet from 'helmet';
+import { Utils } from './utils/utils';
 
-
-// import * as fs from 'fs';
 async function bootstrap() {
-  const app = await NestFactory.create(ApplicationModule,
-    // {
-    //   httpsOptions: {
-    //     key: fs.readFileSync('ssl_private_key.pem'),
-    //     cert: fs.readFileSync('ssl_certificate.crt'),
-    //   },
-    // }
-  );
-  app.use(csurf());
+  const httpsOptions = Utils.getKeyAndCert();
+  const app = await NestFactory.create(ApplicationModule, httpsOptions);
   app.use(rateLimit({
     windowMs: 15 * 60 * 1000, // 15 minutes
     max: 100 // limit each IP to 100 requests per windowMs
@@ -29,6 +20,6 @@ async function bootstrap() {
   app.use(helmet());
   app.useGlobalPipes(new ValidationPipe());
   app.use(compression());
-  await app.listen(3600);
+  await app.listen(5600);
 }
 bootstrap();

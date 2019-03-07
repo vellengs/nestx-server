@@ -15,7 +15,7 @@ import { Roles } from '../common/decorators/roles.decorator';
 import { LoggingInterceptor } from '../common/interceptors/logging.interceptor';
 import { TransformInterceptor } from '../common/interceptors/transform.interceptor';
 import { ParseIntPipe } from '../common/pipes/parse-int.pipe';
-import { RoleTypes } from 'config/enums';
+import { RoleTypes } from './../config/enums';
 
 @Controller('cats')
 @UseGuards(RolesGuard)

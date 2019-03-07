@@ -9,21 +9,26 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const core_1 = require("@nestjs/core");
-const swagger_1 = require("@nestjs/swagger");
 const server_module_1 = require("./server.module");
+const common_1 = require("@nestjs/common");
+const swagger_1 = require("./swagger");
+const compression = require("compression");
+const rateLimit = require("express-rate-limit");
+const helmet = require("helmet");
 function bootstrap() {
     return __awaiter(this, void 0, void 0, function* () {
         const app = yield core_1.NestFactory.create(server_module_1.ApplicationModule);
-        const options = new swagger_1.DocumentBuilder()
-            .setTitle('nestx backend')
-            .setDescription('The nestx backend API description')
-            .setVersion('1.0')
-            .addTag('nestx')
-            .addBearerAuth()
-            .build();
-        const document = swagger_1.SwaggerModule.createDocument(app, options);
-        swagger_1.SwaggerModule.setup('/docs', app, document);
-        yield app.listen(3002);
+        app.use(rateLimit({
+            windowMs: 15 * 60 * 1000,
+            max: 100
+        }));
+        app.setGlobalPrefix('api');
+        swagger_1.setupSwagger(app);
+        app.enableCors();
+        app.use(helmet());
+        app.useGlobalPipes(new common_1.ValidationPipe());
+        app.use(compression());
+        yield app.listen(5600);
     });
 }
 bootstrap();

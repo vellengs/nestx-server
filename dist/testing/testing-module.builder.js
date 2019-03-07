@@ -66,7 +66,9 @@ class TestingModuleBuilder {
     createOverrideByBuilder(add) {
         return {
             useValue: value => add({ useValue: value }),
-            useFactory: (options) => add(Object.assign({}, options, { useFactory: options.factory })),
+            useFactory: (options) => {
+                return add(Object.assign({}, options, { useFactory: options.factory }));
+            },
             useClass: metaType => add({ useClass: metaType }),
         };
     }

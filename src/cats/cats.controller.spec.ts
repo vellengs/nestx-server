@@ -20,7 +20,6 @@ describe('CatsController', () => {
     it('should return an array of cats', async () => {
       const result: any = ['test'];
       jest.spyOn(catsService, 'findAll').mockImplementation(() => result);
-
       expect(await catsController.findAll()).toBe(result);
     });
   });

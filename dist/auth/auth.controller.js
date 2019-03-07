@@ -22,25 +22,44 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@nestjs/common");
 const auth_service_1 = require("./auth.service");
-const login_user_dto_1 = require("./dto/login-user.dto");
+const swagger_1 = require("@nestjs/swagger");
+const Login_dto_1 = require("./dto/Login.dto");
+const Register_dto_1 = require("./dto/Register.dto");
 let AuthController = class AuthController {
     constructor(authService) {
         this.authService = authService;
     }
-    createToken(loginUserDto) {
+    login(payload) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield this.authService.createToken(loginUserDto);
+            const user = yield this.authService.validateUser({ email: payload.username });
+            return yield this.authService.createToken(user);
+        });
+    }
+    register(payload) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const user = yield this.authService.register(payload);
+            return yield this.authService.createToken(user);
         });
     }
 };
 __decorate([
-    common_1.Post('token'),
-    common_1.HttpCode(common_1.HttpStatus.OK),
+    common_1.Post('login'),
+    swagger_1.ApiResponse({ status: 201, description: 'Successful Login' }),
+    swagger_1.ApiResponse({ status: 400, description: 'Bad Request' }),
     __param(0, common_1.Body()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [login_user_dto_1.LoginUserDto]),
+    __metadata("design:paramtypes", [Login_dto_1.LoginDto]),
     __metadata("design:returntype", Promise)
-], AuthController.prototype, "createToken", null);
+], AuthController.prototype, "login", null);
+__decorate([
+    common_1.Post('register'),
+    swagger_1.ApiResponse({ status: 201, description: 'Successful Registration' }),
+    swagger_1.ApiResponse({ status: 400, description: 'Bad Request' }),
+    __param(0, common_1.Body()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Register_dto_1.RegisterDto]),
+    __metadata("design:returntype", Promise)
+], AuthController.prototype, "register", null);
 AuthController = __decorate([
     common_1.Controller('auth'),
     __metadata("design:paramtypes", [auth_service_1.AuthService])
