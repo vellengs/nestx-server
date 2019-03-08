@@ -70,6 +70,90 @@
                 "produces": ["application/json"],
                 "consumes": ["application/json"]
             }
+        },
+        "/users": {
+            "post": {
+                "parameters": [{
+                    "name": "CreateUserDto",
+                    "required": true,
+                    "in": "body",
+                    "schema": {
+                        "$ref": "#/definitions/CreateUserDto"
+                    }
+                }],
+                "responses": {
+                    "201": {
+                        "description": ""
+                    }
+                },
+                "produces": ["application/json"],
+                "consumes": ["application/json"]
+            },
+            "get": {
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                },
+                "produces": ["application/json"],
+                "consumes": ["application/json"]
+            }
+        },
+        "/users/hello": {
+            "get": {
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                },
+                "produces": ["application/json"],
+                "consumes": ["application/json"]
+            }
+        },
+        "/cats": {
+            "post": {
+                "parameters": [{
+                    "name": "CreateProductDto",
+                    "required": true,
+                    "in": "body",
+                    "schema": {
+                        "$ref": "#/definitions/CreateProductDto"
+                    }
+                }],
+                "responses": {
+                    "201": {
+                        "description": ""
+                    }
+                },
+                "produces": ["application/json"],
+                "consumes": ["application/json"]
+            },
+            "get": {
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                },
+                "produces": ["application/json"],
+                "consumes": ["application/json"]
+            }
+        },
+        "/cats/{id}": {
+            "get": {
+                "parameters": [{
+                    "type": "number",
+                    "name": "id",
+                    "required": true,
+                    "in": "path"
+                }],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                },
+                "produces": ["application/json"],
+                "consumes": ["application/json"]
+            }
         }
     },
     "definitions": {
@@ -83,6 +167,25 @@
             "required": ["password"]
         },
         "RegisterDto": {
+            "type": "object",
+            "properties": {}
+        },
+        "CreateUserDto": {
+            "type": "object",
+            "properties": {
+                "username": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                },
+                "breed": {
+                    "type": "string"
+                }
+            },
+            "required": ["username", "password", "breed"]
+        },
+        "CreateProductDto": {
             "type": "object",
             "properties": {}
         }

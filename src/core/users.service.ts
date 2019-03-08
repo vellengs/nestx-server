@@ -2,6 +2,9 @@ import { Model } from 'mongoose';
 import { Injectable, Inject } from '@nestjs/common';
 import { User } from './interfaces/user.interface';
 import { CreateUserDto } from './dto/create-user.dto';
+import { EditUserDto } from './dto/edit-user.dto';
+import { ObjectID } from 'typeorm';
+import { ResultList } from './../common/interfaces/result.interface';
 
 @Injectable()
 export class UsersService {
@@ -10,19 +13,34 @@ export class UsersService {
   async create(createCatDto: CreateUserDto): Promise<User> {
     const instance = new this.model(createCatDto);
     return await instance.save();
-
   }
 
-  async findAll(): Promise<User[]> {
-    return await this.model.find().exec();
+  async update(editUser: EditUserDto): Promise<User> {
+    const instance = new this.model(editUser);
+    return await instance.save();
+  }
+
+  async findAll(index: number = 1, size: number = 10, query: any = {}): Promise<ResultList<User>> {
+    return new Promise<ResultList<User>>(async (resolve) => {
+      let result: ResultList<User> = {
+        list: await this.model.find({ skip: size * (index - 1), take: size }),
+        count: await this.model.count(query),
+        query: {
+          index: index,
+          size: size
+        }
+      }
+      resolve(result);
+    })
   }
 
   async findOne(conditions?: any): Promise<User> {
     return await this.model.findOne(conditions).exec();
   }
 
-  async test(): Promise<string> {
-    return 'test';
+  async remove(id: string | number | ObjectID): Promise<any> {
+    let entity = await this.model.findOne(id);
+    return await this.model.remove(entity);
   }
 
 }
