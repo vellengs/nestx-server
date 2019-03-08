@@ -9,8 +9,4 @@ export class CreateUserDto {
   @ApiModelProperty()
   @IsString()
   readonly password: string;
-
-  @ApiModelProperty({ type: String })
-  @IsString()
-  readonly breed: string;
 }

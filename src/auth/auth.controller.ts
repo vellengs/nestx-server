@@ -14,7 +14,7 @@ export class AuthController {
   @ApiResponse({ status: 201, description: 'Successful Login' })
   @ApiResponse({ status: 400, description: 'Bad Request' })
   async login(@Body() payload: LoginDto): Promise<Token> {
-    const user = await this.authService.validateUser({ email: payload.username });
+    const user = await this.authService.validateUser({ account: payload.username });
     return await this.authService.createToken(user);
   }
 

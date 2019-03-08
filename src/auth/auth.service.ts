@@ -3,11 +3,15 @@ import { JwtService } from '@nestjs/jwt';
 import { JwtPayload, Token } from './interfaces/jwt-payload.interface';
 import { LoginDto } from './dto/login.dto';
 import { RegisterDto } from './dto/Register.dto';
-// import { User, UsersService } from './../user';
+import { UsersService } from './../core/users.service';
+import { User } from './../core/interfaces/user.interface';
 
 @Injectable()
 export class AuthService {
-  constructor(private readonly jwtService: JwtService) { }
+  constructor(
+    private readonly jwtService: JwtService,
+    private readonly userService: UsersService,
+  ) { }
 
   async createToken(payload: LoginDto): Promise<Token> {
     const accessToken = this.jwtService.sign({ email: payload.username });
@@ -17,26 +21,18 @@ export class AuthService {
     };
   }
 
-  async register(payload: RegisterDto): Promise<any> {
-    return payload; // TODO
+  async register(payload: RegisterDto): Promise<User> {
+    return this.userService.create(payload);
   }
 
-  async findOneByToken() {
+  async findOneByToken(account: string): Promise<User> {
+    return this.userService.findOne({ account: account });
 
   }
 
-  async validateUser(payload: JwtPayload): Promise<any> {
-
-    // const user = await this.userService.getByEmail(payload.email);
-    // if (!user) {
-    //   throw new UnauthorizedException('Wrong login combination!');
-    // }
-
-    // if (!user.validate(payload.password)) {
-    //   throw new UnauthorizedException('Wrong login combination!');
-    // }
-    // return user;
-
-    return {};
+  async validateUser(payload: JwtPayload): Promise<User> {
+    return this.userService.findOne({
+      username: payload.account
+    })
   }
 }

@@ -1,5 +1,5 @@
 export interface JwtPayload {
-  email: string;
+  account: string;
 }
 
 export interface Token {

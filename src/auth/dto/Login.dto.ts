@@ -4,6 +4,9 @@ import { ApiModelProperty } from '@nestjs/swagger';
 export class LoginDto {
     @IsNotEmpty()
     @IsString()
+    @ApiModelProperty({
+        required: true
+    })
     readonly username: string;
 
     @ApiModelProperty({
