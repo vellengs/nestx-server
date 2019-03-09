@@ -1,5 +1,5 @@
 import { Schema, SchemaTypes as t } from 'mongoose';
-export const schema = new Schema({
+export const DictSchema = new Schema({
     category: { type: t.String },
     name: { type: t.String },
     translate: { type: t.String },

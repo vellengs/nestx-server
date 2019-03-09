@@ -1,7 +1,5 @@
 import { Schema, SchemaTypes as t } from 'mongoose';
-
-
-export const schema = new Schema({
+export const SettingSchema = new Schema({
     id: {
         type: t.String
     },
