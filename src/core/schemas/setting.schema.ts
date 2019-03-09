@@ -1,21 +1,23 @@
-import { Schema, SchemaTypes as t, SchemaOptions } from 'mongoose';
-const option: SchemaOptions = {};
-option.timestamps = true;
+import { Schema, SchemaTypes as t } from 'mongoose';
+
 
 export const schema = new Schema({
+    id: {
+        type: t.String
+    },
     name: {
         type: t.String
     },
-    operator: {
+    key: {
         type: t.String
     },
-    operatorIp: {
-        type: t.String
+    value: {
+        type: t.Mixed
     },
-    operation: {
-        type: t.String
-    },
-    comment: {
+    description: {
         type: t.String
     }
-}, option);
+}, {
+        timestamps: true,
+        usePushEach: true,
+    });

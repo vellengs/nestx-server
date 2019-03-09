@@ -17,4 +17,12 @@ export class RegisterDto {
         required: true
     })
     readonly password: string;
+
+    @IsNotEmpty()
+    @MinLength(11)
+    @IsString()
+    @ApiModelProperty({
+        required: true
+    })
+    readonly mobile: string;
 }

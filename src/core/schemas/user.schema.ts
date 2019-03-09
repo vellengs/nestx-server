@@ -1,39 +1,76 @@
-// import * as mongoose from 'mongoose';
+import { Schema, Error, SchemaTypes as t } from 'mongoose';
+import * as bcrypt from 'bcrypt';
 
-// import { Schema, SchemaTypes as t, SchemaOptions } from 'mongoose';
-// const option: SchemaOptions = {};
-// option.timestamps = true;
-
-// export const schema = new mongoose.Schema({
-//     username: t.String,
-//     password: t.String,
-//     avatar: t.String,
-//     email: t.String,
-//     nick: t.String,
-//     type: t.String,
-//     mobile: t.String,
-//     roles: [{
-//         type: t.ObjectId, ref: 'Role'
-//     }],
-//     isDisable: {
-//         type: t.Boolean
-//     },
-//     isAdmin: {
-//         type: t.Boolean
-//     },
-//     isApproved: {
-//         type: t.Boolean
-//     },
-//     expired: {
-//         type: t.Boolean
-//     },
-// }, option);
-
-
-import { Schema } from 'mongoose';
 export const schema = new Schema({
-    name: String,
-    age: Number,
-    breed: String,
-});
+    username: { type: t.String, unique: true, required: true },
+    password: t.String,
+    avatar: t.String,
+    email: t.String,
+    nick: t.String,
+    about: t.String,
+    location: {
+        country: t.String,
+        province: t.String,
+        district: t.String,
+        address: t.String,
+    },
+    type: t.String,
+    mobile: t.String,
+    roles: [{
+        type: t.ObjectId, ref: 'Role'
+    }],
+    isDisable: {
+        type: t.Boolean
+    },
+    isAdmin: {
+        type: t.Boolean
+    },
+    isApproved: {
+        type: t.Boolean
+    },
+    expired: {
+        type: t.Boolean
+    },
+}, {
+        timestamps: true,
+        usePushEach: true,
+    });
 
+function preSave(next: Function) {
+    const user = this;
+    if (!user.isModified('password')) { return next(); }
+    bcrypt.genSalt(10, (err: any, salt: any) => {
+        if (err) { return next(err); }
+        bcrypt.hash(user.password, salt, (err: Error, hash: string) => {
+            if (err) { return next(err); }
+            user.password = hash;
+            next();
+        });
+    });
+}
+
+function preUpdate(next: Function) {
+    const updateDoc = this.getUpdate();
+    const rawPassword = (updateDoc.$set || updateDoc).password;
+    if (rawPassword) {
+        const password = bcrypt.hashSync(rawPassword, bcrypt.genSaltSync(10));
+        this.findOneAndUpdate({}, { password: password });
+    }
+    next();
+}
+
+schema.pre('save', preSave);
+schema.pre('findOneAndUpdate', preUpdate);
+schema.methods.comparePassword = function (candidatePassword: string, cb: (err: any, isMatch: any) => {}) {
+    bcrypt.compare(candidatePassword, this.password, (err: Error, isMatch: boolean) => {
+        if (cb) {
+            cb(err, isMatch);
+        }
+    });
+};
+
+schema.methods.pure = function () {
+    const obj = this.toJSON();
+    delete obj.password;
+    return obj;
+}

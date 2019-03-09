@@ -1,5 +1,4 @@
-import { Controller, Get, UseGuards, Post, Body } from '@nestjs/common';
-import { AuthGuard } from '@nestjs/passport';
+import { Controller, Post, Body } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { Token } from './interfaces/jwt-payload.interface';
 import { ApiResponse } from '@nestjs/swagger';
@@ -14,15 +13,13 @@ export class AuthController {
   @ApiResponse({ status: 201, description: 'Successful Login' })
   @ApiResponse({ status: 400, description: 'Bad Request' })
   async login(@Body() payload: LoginDto): Promise<Token> {
-    const user = await this.authService.validateUser({ account: payload.username });
-    return await this.authService.createToken(user);
+    return this.authService.login(payload);
   }
 
   @Post('register')
   @ApiResponse({ status: 201, description: 'Successful Registration' })
   @ApiResponse({ status: 400, description: 'Bad Request' })
   async register(@Body() payload: RegisterDto): Promise<Token> {
-    const user = await this.authService.register(payload);
-    return await this.authService.createToken(user);
+    return await this.authService.register(payload);
   }
 }

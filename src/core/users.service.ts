@@ -10,6 +10,22 @@ import { ResultList } from './../common/interfaces/result.interface';
 export class UsersService {
   constructor(@Inject('UserModelToken') private readonly model: Model<User>) { }
 
+  async login(account: string, password: string): Promise<User | false> {
+    const instance = await this.model.findOne({ username: account });
+    if (instance) {
+      return new Promise<User | false>((resolve, reject) => {
+        instance.comparePassword(password, (err: Error, isMatch: boolean) => {
+          if (err) { return reject(err); }
+          if (isMatch) {
+            resolve(instance);
+          }
+          resolve(false);
+        });
+      });
+    }
+    return false;
+  }
+
   async create(createCatDto: CreateUserDto): Promise<User> {
     const instance = new this.model(createCatDto);
     return await instance.save();
