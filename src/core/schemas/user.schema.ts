@@ -1,7 +1,7 @@
 import { Schema, Error, SchemaTypes as t } from 'mongoose';
 import * as bcrypt from 'bcrypt';
 
-export const schema = new Schema({
+export const UserSchema = new Schema({
     username: { type: t.String, unique: true, required: true },
     password: t.String,
     avatar: t.String,
@@ -59,9 +59,9 @@ function preUpdate(next: Function) {
     next();
 }
 
-schema.pre('save', preSave);
-schema.pre('findOneAndUpdate', preUpdate);
-schema.methods.comparePassword = function (candidatePassword: string, cb: (err: any, isMatch: any) => {}) {
+UserSchema.pre('save', preSave);
+UserSchema.pre('findOneAndUpdate', preUpdate);
+UserSchema.methods.comparePassword = function (candidatePassword: string, cb: (err: any, isMatch: any) => {}) {
     bcrypt.compare(candidatePassword, this.password, (err: Error, isMatch: boolean) => {
         if (cb) {
             cb(err, isMatch);
@@ -69,7 +69,7 @@ schema.methods.comparePassword = function (candidatePassword: string, cb: (err: 
     });
 };
 
-schema.methods.pure = function () {
+UserSchema.methods.pure = function () {
     const obj = this.toJSON();
     delete obj.password;
     return obj;

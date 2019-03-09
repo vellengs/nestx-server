@@ -1,13 +1,17 @@
 import { Module } from '@nestjs/common';
 import { UsersController } from './users.controller';
 import { UsersService } from './users.service';
-import { coreProviders } from './core.providers';
-import { DatabaseModule } from '../database/database.module';
+import { MongooseModule } from '@nestjs/mongoose';
+import { PassportModule } from '@nestjs/passport';
+import { UserSchema } from './schemas/user.schema';
 
 @Module({
-  imports: [DatabaseModule],
+  imports: [
+    MongooseModule.forFeature([{ name: 'User', schema: UserSchema }]),
+    PassportModule.register({ defaultStrategy: 'jwt', session: false })
+  ],
   controllers: [UsersController],
-  providers: [UsersService, ...coreProviders],
+  providers: [UsersService],
   exports: [UsersService]
 })
 export class CoreModule { }
