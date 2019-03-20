@@ -51,12 +51,21 @@ export class UsersService {
     })
   }
 
+  async search(keyword?: string, value?: string, limit: number = 10): Promise<any[]> {
+    // return Repository.search(Db.Account, keyword, value, '', limit, 'name', '_id', 'keyword');
+    return [];
+  }
+
   async findOne(conditions?: any): Promise<User> {
     return await this.model.findOne(conditions).exec();
   }
 
+  async findById(id: string | number | ObjectID): Promise<User> {
+    return await this.model.findById(id).exec();
+  }
+
   async remove(id: string | number | ObjectID): Promise<any> {
-    let entity = await this.model.findOne(id);
+    let entity = await this.model.findById(id);
     return await this.model.remove(entity);
   }
 

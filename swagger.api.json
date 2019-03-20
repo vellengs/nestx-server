@@ -1,0 +1,287 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "nestx server is a simple REST API provider.",
+        "version": "0.0.1",
+        "title": "nestx server"
+    },
+    "basePath": "/api",
+    "tags": [],
+    "schemes": ["https"],
+    "securityDefinitions": {
+        "bearer": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header"
+        }
+    },
+    "paths": {
+        "/": {
+            "get": {
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                },
+                "produces": ["application/json"],
+                "consumes": ["application/json"]
+            }
+        },
+        "/auth/login": {
+            "post": {
+                "parameters": [{
+                    "name": "LoginDto",
+                    "required": true,
+                    "in": "body",
+                    "schema": {
+                        "$ref": "#/definitions/LoginDto"
+                    }
+                }],
+                "responses": {
+                    "201": {
+                        "description": "Successful Login"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                },
+                "produces": ["application/json"],
+                "consumes": ["application/json"]
+            }
+        },
+        "/auth/register": {
+            "post": {
+                "parameters": [{
+                    "name": "RegisterDto",
+                    "required": true,
+                    "in": "body",
+                    "schema": {
+                        "$ref": "#/definitions/RegisterDto"
+                    }
+                }],
+                "responses": {
+                    "201": {
+                        "description": "Successful Registration"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    }
+                },
+                "produces": ["application/json"],
+                "consumes": ["application/json"]
+            }
+        },
+        "/users/profile": {
+            "get": {
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                },
+                "produces": ["application/json"],
+                "consumes": ["application/json"]
+            }
+        },
+        "/users": {
+            "post": {
+                "parameters": [{
+                    "name": "CreateUserDto",
+                    "required": true,
+                    "in": "body",
+                    "schema": {
+                        "$ref": "#/definitions/CreateUserDto"
+                    }
+                }],
+                "responses": {
+                    "201": {
+                        "description": ""
+                    }
+                },
+                "produces": ["application/json"],
+                "consumes": ["application/json"]
+            },
+            "put": {
+                "parameters": [{
+                    "name": "EditUserDto",
+                    "required": true,
+                    "in": "body",
+                    "schema": {
+                        "$ref": "#/definitions/EditUserDto"
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                },
+                "produces": ["application/json"],
+                "consumes": ["application/json"]
+            }
+        },
+        "/users/{id}": {
+            "get": {
+                "parameters": [{
+                    "type": "string",
+                    "name": "id",
+                    "required": true,
+                    "in": "path"
+                }],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                },
+                "produces": ["application/json"],
+                "consumes": ["application/json"]
+            }
+        },
+        "/users/search": {
+            "get": {
+                "parameters": [{
+                    "type": "string",
+                    "name": "value",
+                    "required": true,
+                    "in": "path"
+                }, {
+                    "type": "string",
+                    "name": "keyword",
+                    "required": true,
+                    "in": "path"
+                }],
+                "responses": {
+                    "200": {
+                        "description": "The record has been successfully created.",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/KeyValueDto"
+                            }
+                        }
+                    }
+                },
+                "produces": ["application/json"],
+                "consumes": ["application/json"]
+            }
+        },
+        "/users/{size}/{index}": {
+            "get": {
+                "parameters": [{
+                    "type": "number",
+                    "name": "size",
+                    "required": true,
+                    "in": "path"
+                }, {
+                    "type": "number",
+                    "name": "index",
+                    "required": true,
+                    "in": "path"
+                }],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                },
+                "produces": ["application/json"],
+                "consumes": ["application/json"]
+            }
+        },
+        "/cats": {
+            "post": {
+                "parameters": [{
+                    "name": "CreateProductDto",
+                    "required": true,
+                    "in": "body",
+                    "schema": {
+                        "$ref": "#/definitions/CreateProductDto"
+                    }
+                }],
+                "responses": {
+                    "201": {
+                        "description": ""
+                    }
+                },
+                "produces": ["application/json"],
+                "consumes": ["application/json"]
+            },
+            "get": {
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                },
+                "produces": ["application/json"],
+                "consumes": ["application/json"]
+            }
+        },
+        "/cats/{id}": {
+            "get": {
+                "parameters": [{
+                    "type": "number",
+                    "name": "id",
+                    "required": true,
+                    "in": "path"
+                }],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                },
+                "produces": ["application/json"],
+                "consumes": ["application/json"]
+            }
+        }
+    },
+    "definitions": {
+        "LoginDto": {
+            "type": "object",
+            "properties": {
+                "username": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                }
+            },
+            "required": ["username", "password"]
+        },
+        "RegisterDto": {
+            "type": "object",
+            "properties": {
+                "username": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                },
+                "mobile": {
+                    "type": "string"
+                }
+            },
+            "required": ["username", "password", "mobile"]
+        },
+        "CreateUserDto": {
+            "type": "object",
+            "properties": {
+                "username": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                }
+            },
+            "required": ["username", "password"]
+        },
+        "EditUserDto": {
+            "type": "object",
+            "properties": {}
+        },
+        "KeyValueDto": {
+            "type": "object",
+            "properties": {}
+        },
+        "CreateProductDto": {
+            "type": "object",
+            "properties": {}
+        }
+    }
+}

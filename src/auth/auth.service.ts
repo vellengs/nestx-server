@@ -1,4 +1,4 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { Injectable, UnauthorizedException, NotAcceptableException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { JwtPayload, Token } from './interfaces/jwt-payload.interface';
 import { LoginDto } from './dto/login.dto';
@@ -23,7 +23,7 @@ export class AuthService {
   }
 
   async createToken(payload: LoginDto): Promise<Token> {
-    const accessToken = this.jwtService.sign({ email: payload.username });
+    const accessToken = this.jwtService.sign({ account: payload.username });
     return {
       expiresIn: 3600,
       accessToken,
@@ -31,11 +31,15 @@ export class AuthService {
   }
 
   async register(payload: RegisterDto): Promise<Token> {
-    const user = await this.userService.create(payload);
+    const user = await this.userService.create(payload).catch((error) => {
+      // TODO log error. 
+      throw new NotAcceptableException('register failure');
+    });
     return await this.createToken(user);
   }
 
   async validateUser(payload: JwtPayload) {
+    console.log('payload:', payload);
     return this.userService.findOne({
       username: payload.account
     })
