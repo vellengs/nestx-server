@@ -1,13 +1,13 @@
 import { Controller, Get, Post, Body, UseGuards, Param, Put, ParseIntPipe, Query, Req, HttpStatus } from '@nestjs/common';
-import { CreateUserDto } from './dto/create-user.dto';
+import { CreateUserDto } from './../dto/create-user.dto';
 import { UsersService } from './users.service';
-import { User } from './interfaces/user.interface';
+import { User } from './../interfaces/user.interface';
 import { AuthGuard } from '@nestjs/passport';
-import { EditUserDto } from './dto/edit-user.dto';
+import { EditUserDto } from './../dto/edit-user.dto';
 import { plainToClass } from 'class-transformer';
 import { ResultList } from 'common/interfaces/result.interface';
 import { ApiResponse } from '@nestjs/swagger';
-import { KeyValueDto } from './dto/key-value.dto';
+import { KeyValueDto } from './../dto/key-value.dto';
 
 type ListKeyValue = KeyValueDto[];
 @Controller('users')
@@ -18,22 +18,22 @@ export class UsersController {
   @Get('profile')
   async profile(@Req() request: any): Promise<User> {
     const user = request.user;
-    return await this.usersService.findById(user._id);
+    return this.usersService.findById(user._id);
   }
 
   @Post()
   async create(@Body() user: CreateUserDto) {
-    this.usersService.create(plainToClass(CreateUserDto, user));
+    return this.usersService.create(plainToClass(CreateUserDto, user));
   }
 
   @Put()
   async update(@Body() user: EditUserDto): Promise<User> {
-    return await this.usersService.update(plainToClass(EditUserDto, user));
+    return this.usersService.update(plainToClass(EditUserDto, user));
   }
 
   @Get(':id')
   async findOne(@Param('id') id: string): Promise<User> {
-    return await this.usersService.findById(id);
+    return this.usersService.findById(id);
   }
 
   @Get('search')
@@ -51,7 +51,6 @@ export class UsersController {
 
   @ApiResponse({
     status: HttpStatus.OK,
-    // type:,
     description: 'Paginated result list'
   })
   @Get(':size/:index')
@@ -59,7 +58,7 @@ export class UsersController {
     @Param('index', new ParseIntPipe()) index: number = 1,
     @Param('size', new ParseIntPipe()) size: number = 10,
     @Query() query): Promise<ResultList<User>> {
-    return await this.usersService.findAll(index, size, query);
+    return this.usersService.findAll(index, size, query);
   }
 
 }
