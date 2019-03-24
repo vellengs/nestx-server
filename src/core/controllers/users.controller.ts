@@ -31,11 +31,6 @@ export class UsersController {
     return this.usersService.update(plainToClass(EditUserDto, user));
   }
 
-  @Get(':id')
-  async findOne(@Param('id') id: string): Promise<User> {
-    return this.usersService.findById(id);
-  }
-
   @Get('search')
   @ApiResponse({
     status: HttpStatus.OK,
@@ -49,18 +44,21 @@ export class UsersController {
     return this.usersService.search(keyword, value);
   }
 
+  @Get('query')
   @ApiResponse({
     status: HttpStatus.OK,
     description: 'Paginated result list'
   })
-  @Get(':size/:index')
   async query(
-    @Param('index', new ParseIntPipe()) index: number = 1,
-    @Param('size', new ParseIntPipe()) size: number = 10,
-    @Query('keyword') keyword?: string): Promise<ResultList<User>> {
-    return this.usersService.query(index, size, {
-      keyword
-    });
+    @Query('keyword') keyword?: string,
+    @Query('index', new ParseIntPipe()) index: number = 1,
+    @Query('size', new ParseIntPipe()) size: number = 10,
+  ): Promise<ResultList<User>> {
+    return this.usersService.query(index, size, { keyword });
   }
 
+  @Get(':id')
+  async findOne(@Param('id') id: string): Promise<User> {
+    return this.usersService.findById(id);
+  }
 }

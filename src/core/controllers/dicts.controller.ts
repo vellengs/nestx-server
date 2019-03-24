@@ -24,11 +24,6 @@ export class DictsController {
     return this.dictService.update(plainToClass(EditDictDto, entry));
   }
 
-  @Get(':id')
-  async findOne(@Param('id') id: string): Promise<Dict> {
-    return this.dictService.findById(id);
-  }
-
   @Get('search')
   @ApiResponse({
     status: HttpStatus.OK,
@@ -36,24 +31,28 @@ export class DictsController {
     description: 'Available search keywords'
   })
   async search(
-    @Param('keyword') keyword?: string,
-    @Param('value') value?: string,
+    @Query('keyword') keyword?: string,
+    @Query('value') value?: string,
   ): Promise<KeyValueDto[]> {
     return this.dictService.search(keyword, value);
   }
 
+  @Get('query')
   @ApiResponse({
     status: HttpStatus.OK,
     description: 'Paginated result list'
   })
-  @Get(':size/:index')
   async query(
-    @Param('index', new ParseIntPipe()) index: number = 1,
-    @Param('size', new ParseIntPipe()) size: number = 10,
-    @Query('keyword') keyword?: string): Promise<ResultList<Dict>> {
-    return this.dictService.query(index, size, {
-      keyword
-    });
+    @Query('keyword') keyword?: string,
+    @Query('index', new ParseIntPipe()) index: number = 1,
+    @Query('size', new ParseIntPipe()) size: number = 10,
+  ): Promise<ResultList<Dict>> {
+    return this.dictService.query(index, size, { keyword });
+  }
+
+  @Get(':id')
+  async findOne(@Param('id') id: string): Promise<Dict> {
+    return this.dictService.findById(id);
   }
 
 }

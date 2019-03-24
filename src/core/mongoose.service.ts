@@ -27,11 +27,17 @@ export class MongooseService<T extends Document & Id>  {
     return await instance.save();
   }
 
-  async query(index: number = 1, size: number = 10, query: any = {}): Promise<ResultList<T>> {
+  async query(index: number = 1, size: number = 10,
+    query: Criteria = {}, sort: Criteria | string = { _id: 1 }): Promise<ResultList<T>> {
+    const condition: Criteria = query.keyword ? { name: new RegExp(query.keyword, 'i') } : {};
+
+    console.log('condition:', condition);
+    const listQuery = this.model.find(condition).sort(sort);
+    const collection = this.model.find(condition);
     return new Promise<ResultList<T>>(async (resolve) => {
       let result: ResultList<T> = {
-        list: await this.model.find({ skip: size * (index - 1), take: size }),
-        count: await this.model.count(query),
+        list: await listQuery.limit(size).skip(size * (index - 1)),
+        count: await collection.count(),
         query: {
           index: index,
           size: size
