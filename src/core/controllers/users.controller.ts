@@ -42,7 +42,7 @@ export class UsersController {
     type: [KeyValueDto],
     description: 'Available search keywords'
   })
-  async getAccountsByKeyword(
+  async search(
     @Param('keyword') keyword?: string,
     @Param('value') value?: string,
   ): Promise<KeyValueDto[]> {
@@ -54,11 +54,13 @@ export class UsersController {
     description: 'Paginated result list'
   })
   @Get(':size/:index')
-  async findAll(
+  async query(
     @Param('index', new ParseIntPipe()) index: number = 1,
     @Param('size', new ParseIntPipe()) size: number = 10,
-    @Query() query): Promise<ResultList<User>> {
-    return this.usersService.findAll(index, size, query);
+    @Query('keyword') keyword?: string): Promise<ResultList<User>> {
+    return this.usersService.query(index, size, {
+      keyword
+    });
   }
 
 }

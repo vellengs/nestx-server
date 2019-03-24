@@ -35,7 +35,7 @@ export class DictsController {
     type: [KeyValueDto],
     description: 'Available search keywords'
   })
-  async getAccountsByKeyword(
+  async search(
     @Param('keyword') keyword?: string,
     @Param('value') value?: string,
   ): Promise<KeyValueDto[]> {
@@ -47,11 +47,13 @@ export class DictsController {
     description: 'Paginated result list'
   })
   @Get(':size/:index')
-  async findAll(
+  async query(
     @Param('index', new ParseIntPipe()) index: number = 1,
     @Param('size', new ParseIntPipe()) size: number = 10,
-    @Query() query): Promise<ResultList<Dict>> {
-    return this.dictService.findAll(index, size, query);
+    @Query('keyword') keyword?: string): Promise<ResultList<Dict>> {
+    return this.dictService.query(index, size, {
+      keyword
+    });
   }
 
 }
