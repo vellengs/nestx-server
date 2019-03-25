@@ -13,6 +13,9 @@ export interface Criteria {
 
 @Injectable()
 export class MongooseService<T extends Document & Id>  {
+
+  defaultQueryFields: string[] = [];
+
   constructor(
     protected model: Model<T>
   ) { }
@@ -28,15 +31,24 @@ export class MongooseService<T extends Document & Id>  {
   }
 
   async query(index: number = 1, size: number = 10,
-    query: Criteria = {}, sort: Criteria | string = { _id: 1 }): Promise<ResultList<T>> {
-    const condition: Criteria = query.keyword ? { name: new RegExp(query.keyword, 'i') } : {};
+    query: Criteria = {}, searchField = 'name', fields: string[] = this.defaultQueryFields, sort: Criteria | string = { _id: 1 }
+  ): Promise<ResultList<T>> {
 
-    console.log('condition:', condition);
-    const listQuery = this.model.find(condition).sort(sort);
+    const criteria: Criteria = {};
+    criteria[searchField] = new RegExp(query.keyword, 'i');
+    const condition = query.keyword ? criteria : {};
+
+    const selectFields: Criteria = {};
+    fields.forEach(field => {
+      selectFields[field] = 1;
+      selectFields._id = 0;
+    });
+    const listQuery = this.model.find(condition).select(fields).sort(sort);
     const collection = this.model.find(condition);
+
     return new Promise<ResultList<T>>(async (resolve) => {
       let result: ResultList<T> = {
-        list: await listQuery.limit(size).skip(size * (index - 1)),
+        list: await listQuery.limit(size).skip(size * (index - 1)).lean(),
         count: await collection.count(),
         query: {
           index: index,

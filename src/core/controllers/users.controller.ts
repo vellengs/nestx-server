@@ -9,7 +9,6 @@ import { ResultList } from 'common/interfaces/result.interface';
 import { ApiResponse } from '@nestjs/swagger';
 import { KeyValueDto } from './../dto/key-value.dto';
 
-type ListKeyValue = KeyValueDto[];
 @Controller('users')
 @UseGuards(AuthGuard('jwt'))
 export class UsersController {
@@ -54,7 +53,7 @@ export class UsersController {
     @Query('index', new ParseIntPipe()) index: number = 1,
     @Query('size', new ParseIntPipe()) size: number = 10,
   ): Promise<ResultList<User>> {
-    return this.usersService.query(index, size, { keyword });
+    return this.usersService.query(index, size, { keyword }, 'name');
   }
 
   @Get(':id')

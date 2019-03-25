@@ -1,28 +1,27 @@
 import { Controller, Get, Post, Body, UseGuards, Param, Put, ParseIntPipe, Query, HttpStatus } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { plainToClass } from 'class-transformer';
-import { ResultList } from 'common/interfaces/result.interface';
+import { ResultList } from './../../common/interfaces/result.interface';
 import { ApiResponse } from '@nestjs/swagger';
 import { KeyValueDto } from './../dto/key-value.dto';
-import { DictsService } from './dicts.service';
-import { Dict } from './../interfaces/dict.interface';
-import { CreateDictDto } from './../dto/create-dict.dto';
-import { EditDictDto } from './../dto/edit-dict';
-import { PlainDictDto } from './../dto/plain-dict';
+import { MenusService } from './menus.service';
+import { Menu } from './../interfaces/Menu.interface';
+import { CreateMenuDto } from './../dto/create-menu.dto';
+import { EditMenuDto } from './../dto/edit-menu.dto';
 
-@Controller('dicts')
+@Controller('menus')
 @UseGuards(AuthGuard('jwt'))
-export class DictsController {
-  constructor(private readonly dictService: DictsService) { }
+export class MenusController {
+  constructor(private readonly menuService: MenusService) { }
 
   @Post()
-  async create(@Body() entry: CreateDictDto) {
-    return this.dictService.create(plainToClass(CreateDictDto, entry));
+  async create(@Body() entry: CreateMenuDto) {
+    return this.menuService.create(plainToClass(CreateMenuDto, entry));
   }
 
   @Put()
-  async update(@Body() entry: EditDictDto): Promise<Dict> {
-    return this.dictService.update(plainToClass(EditDictDto, entry));
+  async update(@Body() entry: EditMenuDto): Promise<Menu> {
+    return this.menuService.update(plainToClass(EditMenuDto, entry));
   }
 
   @Get('search')
@@ -35,7 +34,7 @@ export class DictsController {
     @Query('keyword') keyword?: string,
     @Query('value') value?: string,
   ): Promise<KeyValueDto[]> {
-    return this.dictService.search(keyword, value);
+    return this.menuService.search(keyword, value);
   }
 
   @Get('query')
@@ -47,13 +46,13 @@ export class DictsController {
     @Query('keyword') keyword?: string,
     @Query('index', new ParseIntPipe()) index: number = 1,
     @Query('size', new ParseIntPipe()) size: number = 10,
-  ): Promise<ResultList<Dict>> {
-    return this.dictService.query(index, size, { keyword }, );
+  ): Promise<ResultList<Menu>> {
+    return this.menuService.query(index, size, { keyword });
   }
 
   @Get(':id')
-  async findOne(@Param('id') id: string): Promise<Dict> {
-    return this.dictService.findById(id);
+  async findOne(@Param('id') id: string): Promise<Menu> {
+    return this.menuService.findById(id);
   }
 
 }

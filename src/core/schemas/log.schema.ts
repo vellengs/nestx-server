@@ -2,7 +2,7 @@ import { Schema, SchemaTypes as t, SchemaOptions } from 'mongoose';
 const option: SchemaOptions = {};
 option.timestamps = true;
 
-export const LogsSchema = new Schema({
+export const LogSchema = new Schema({
     name: {
         type: t.String
     },

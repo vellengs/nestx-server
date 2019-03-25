@@ -2,7 +2,7 @@ import { Schema, SchemaTypes as t, SchemaOptions } from 'mongoose';
 const option: SchemaOptions = {};
 option.timestamps = true;
 
-export const MenusSchema = new Schema({
+export const MenuSchema = new Schema({
     name: { type: t.String },
     slug: { type: t.String },
     group: { type: t.Boolean },
