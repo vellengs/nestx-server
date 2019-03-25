@@ -7,6 +7,18 @@ import { MongooseService } from './../mongoose.service';
 @Injectable()
 export class UsersService extends MongooseService<User> {
 
+  defaultQueryFields = [
+    'username',
+    'avatar',
+    'email',
+    'name',
+    'email',
+    'mobile',
+    'isAdmin',
+    'isApproved',
+    'expired',
+  ];
+
   constructor(@InjectModel('User') protected readonly model: Model<User>) {
     super(model);
   }

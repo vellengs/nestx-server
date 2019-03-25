@@ -25,9 +25,12 @@ export class MongooseService<T extends Document & Id>  {
     return await instance.save();
   }
 
-  async update(entry: any): Promise<T> {
-    const instance = new this.model(entry);
-    return await instance.save();
+  async update(entry: any, fields: string[] = this.defaultQueryFields): Promise<T> {
+    const instance = await this.model.findOneAndUpdate(
+      { _id: entry._id },
+      { $set: entry },
+      { upsert: true, fields: this.getFields(fields), 'new': true }).exec();
+    return instance;
   }
 
   async query(index: number = 1, size: number = 10,
@@ -38,12 +41,8 @@ export class MongooseService<T extends Document & Id>  {
     criteria[searchField] = new RegExp(query.keyword, 'i');
     const condition = query.keyword ? criteria : {};
 
-    const selectFields: Criteria = {};
-    fields.forEach(field => {
-      selectFields[field] = 1;
-      selectFields._id = 0;
-    });
-    const listQuery = this.model.find(condition).select(fields).sort(sort);
+    const selectFields: Criteria = this.getFields(fields);
+    const listQuery = this.model.find(condition).select(selectFields).sort(sort);
     const collection = this.model.find(condition);
 
     return new Promise<ResultList<T>>(async (resolve) => {
@@ -112,6 +111,15 @@ export class MongooseService<T extends Document & Id>  {
   async remove(id: string | number | ObjectID): Promise<any> {
     let entity = await this.model.findById(id);
     return await this.model.remove(entity);
+  }
+
+  private getFields(fields: string[]) {
+    const selectFields: Criteria = {};
+    // selectFields._id = 0;
+    fields.forEach(field => {
+      selectFields[field] = 1;
+    });
+    return selectFields;
   }
 
 }

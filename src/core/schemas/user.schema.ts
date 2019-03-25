@@ -6,7 +6,7 @@ export const UserSchema = new Schema({
     password: t.String,
     avatar: t.String,
     email: t.String,
-    nick: t.String,
+    name: t.String,
     about: t.String,
     location: {
         country: t.String,

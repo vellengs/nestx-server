@@ -22,11 +22,13 @@ export const MONGODB_URI = prod
   : process.env['MONGODB_URI_LOCAL'];
 
 if (!SESSION_SECRET) {
+  console.log('No client secret. Set SESSION_SECRET environment variable.');
   logger.error('No client secret. Set SESSION_SECRET environment variable.');
   process.exit(1);
 }
 
 if (!MONGODB_URI) {
+  console.log('No mongo connection string. Set MONGODB_URI environment variable.');
   logger.error(
     'No mongo connection string. Set MONGODB_URI environment variable.',
   );
