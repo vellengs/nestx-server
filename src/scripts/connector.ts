@@ -1,8 +1,8 @@
 import * as mongoose from 'mongoose';
-import * as bluebird from 'bluebird';
+// import * as bluebird from 'bluebird';
 
 export function connect(uri: string) {
-    (<any>mongoose).Promise = bluebird;
+    // (<any>mongoose).Promise = bluebird;
     mongoose.connect(uri).then(() => {
         console.log('success connected to', uri);
     });
