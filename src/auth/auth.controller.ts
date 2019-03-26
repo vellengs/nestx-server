@@ -1,4 +1,4 @@
-import { Controller, Post, Body } from '@nestjs/common';
+import { Controller, Post, Body, Get } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { Token } from './interfaces/jwt-payload.interface';
 import { ApiResponse } from '@nestjs/swagger';
@@ -22,4 +22,5 @@ export class AuthController {
   async register(@Body() payload: RegisterDto): Promise<Token> {
     return await this.authService.register(payload);
   }
+
 }

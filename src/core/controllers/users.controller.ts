@@ -1,13 +1,10 @@
 import { Controller, Get, Post, Body, UseGuards, Param, Put, ParseIntPipe, Query, Req, HttpStatus } from '@nestjs/common';
-import { CreateUserDto } from './../dto/create-user.dto';
 import { UsersService } from './users.service';
 import { User } from './../interfaces/user.interface';
 import { AuthGuard } from '@nestjs/passport';
-import { EditUserDto } from './../dto/edit-user.dto';
 import { plainToClass } from 'class-transformer';
 import { ResultList } from 'common/interfaces/result.interface';
-import { ApiResponse } from '@nestjs/swagger';
-import { KeyValueDto } from './../dto/key-value.dto';
+import { KeyValueDto, CreateUserRes, EditUserRes } from './../dto';
 
 @Controller('users')
 @UseGuards(AuthGuard('jwt'))
@@ -21,21 +18,16 @@ export class UsersController {
   }
 
   @Post()
-  async create(@Body() user: CreateUserDto) {
-    return this.usersService.create(plainToClass(CreateUserDto, user));
+  async create(@Body() user: CreateUserRes) {
+    return this.usersService.create(plainToClass(CreateUserRes, user));
   }
 
   @Put()
-  async update(@Body() user: EditUserDto): Promise<User> {
-    return this.usersService.update(plainToClass(EditUserDto, user));
+  async update(@Body() user: EditUserRes): Promise<User> {
+    return this.usersService.update(plainToClass(EditUserRes, user));
   }
 
   @Get('search')
-  @ApiResponse({
-    status: HttpStatus.OK,
-    type: [KeyValueDto],
-    description: 'Available search keywords'
-  })
   async search(
     @Param('keyword') keyword?: string,
     @Param('value') value?: string,
@@ -44,10 +36,6 @@ export class UsersController {
   }
 
   @Get('query')
-  @ApiResponse({
-    status: HttpStatus.OK,
-    description: 'Paginated result list'
-  })
   async query(
     @Query('keyword') keyword?: string,
     @Query('index', new ParseIntPipe()) index: number = 1,

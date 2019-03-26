@@ -1,4 +1,4 @@
-export class CreateGroupDto {
+export class CreateGroupReq {
   outid?: number;
   name: string;
   icon?: string;
@@ -10,7 +10,7 @@ export class CreateGroupDto {
   description?: string;
 }
 
-export class EditGroupDto {
+export class EditGroupReq {
   id: string;
   outid?: number;
   name: string;
@@ -23,7 +23,7 @@ export class EditGroupDto {
   description?: string;
 }
 
-export class GroupResponse {
+export class GroupRes {
   id: string;
   outid?: number;
   name: string;
@@ -34,23 +34,4 @@ export class GroupResponse {
   order: number;
   isRegion?: boolean;
   description?: string;
-}
-
-export const GroupResponseFields = [
-  'outid',
-  'id',
-  'name',
-  'icon',
-  'parent',
-  'paths',
-  'director',
-  'order',
-  'isRegion',
-  'description'
-];
-
-export declare interface PaginateGroup {
-  error?: Error;
-  list: Array<GroupResponse>;
-  total: number;
 }
