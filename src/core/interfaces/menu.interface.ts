@@ -1,6 +1,6 @@
 import { Document } from 'mongoose';
 
-export interface Menu extends Document {
+export interface Menu {
   _id: string;
   name: string;								// 菜单名称
   slug: string;								// 标识串
@@ -21,3 +21,5 @@ export interface Menu extends Document {
   permissions?: any[],
   isMenu: boolean;							// 是否是菜单
 }
+
+export type MenuModel = Menu & Document;

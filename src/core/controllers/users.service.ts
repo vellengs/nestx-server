@@ -1,11 +1,11 @@
 import { Model } from 'mongoose';
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { User } from './../interfaces/user.interface';
+import { User, UserModel } from './../interfaces';
 import { MongooseService } from './../mongoose.service';
 
 @Injectable()
-export class UsersService extends MongooseService<User> {
+export class UsersService extends MongooseService<UserModel> {
 
   defaultQueryFields = [
     'username',
@@ -19,7 +19,7 @@ export class UsersService extends MongooseService<User> {
     'expired',
   ];
 
-  constructor(@InjectModel('User') protected readonly model: Model<User>) {
+  constructor(@InjectModel('User') protected readonly model: Model<UserModel>) {
     super(model);
   }
 

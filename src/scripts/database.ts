@@ -8,13 +8,21 @@ import {
   GroupSchema
 } from './../core/schemas';
 import { model } from 'mongoose';
-import { Dict, Log, Menu, Role, Setting, User, Group } from './../core/interfaces';
+import {
+  DictModel,
+  LogModel,
+  MenuModel,
+  RoleModel,
+  UserModel,
+  SettingModel,
+  GroupModel
+} from './../core/interfaces';
 export const CoreDatabase = {
-  Dict: model<Dict & Document>('Dict', DictSchema),
-  Log: model<Log & Document>('Log', LogSchema),
-  Menu: model<Menu & Document>('Menu', MenuSchema),
-  Role: model<Role & Document>('Role', RoleSchema),
-  User: model<User & Document>('User', UserSchema),
-  Setting: model<Setting & Document>('Setting', SettingSchema),
-  Group: model<Group & Document>('Group', GroupSchema)
+  Dict: model<DictModel>('Dict', DictSchema),
+  Log: model<LogModel>('Log', LogSchema),
+  Menu: model<MenuModel>('Menu', MenuSchema),
+  Role: model<RoleModel>('Role', RoleSchema),
+  User: model<UserModel>('User', UserSchema),
+  Setting: model<SettingModel>('Setting', SettingSchema),
+  Group: model<GroupModel>('Group', GroupSchema)
 };

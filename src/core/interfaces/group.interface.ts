@@ -1,6 +1,6 @@
 import { Document } from 'mongoose';
 
-export interface Group extends Document {
+export interface Group {
     _id: string;						// 编号
     outid: number;						// 外部编号
     name: string;						// 名称
@@ -12,3 +12,5 @@ export interface Group extends Document {
     isRegion: boolean;                 // 是否大区
     description: string;				// 描述
 }
+
+export type GroupModel = Group & Document;

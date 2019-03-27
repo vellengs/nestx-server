@@ -1,7 +1,6 @@
-import { Controller, Get, Post, Body, UseGuards, Param, Put, ParseIntPipe, Query, HttpStatus } from '@nestjs/common';
+import { Controller, Get, UseGuards, Param, ParseIntPipe, Query } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { ResultList } from 'common/interfaces/result.interface';
-import { ApiResponse } from '@nestjs/swagger';
+import { ResultList } from './../../common/interfaces/result.interface';
 import { LogsService } from './logs.service';
 import { Log } from './../interfaces';
 import { KeyValueDto } from './../dto';

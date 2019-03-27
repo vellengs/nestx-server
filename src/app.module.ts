@@ -9,9 +9,6 @@ import { CoreModule } from './core/core.module';
 import { CommerceModule } from './commerce/commerce.module';
 import { CmsModule } from './cms/cms.module';
 import { MONGODB_URI } from './utils/secrets';
-
-console.log('MONGODB_URI:', MONGODB_URI);
-
 @Module({
   imports: [
     TypeOrmModule.forRoot(),

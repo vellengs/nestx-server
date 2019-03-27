@@ -1,6 +1,6 @@
 import { Document } from 'mongoose';
 
-export interface Log extends Document {
+export interface Log {
     id: string;
     name: string;								// 日志名称
     operator: string;							// 操作人
@@ -9,3 +9,5 @@ export interface Log extends Document {
     comment: string;
     createdAt: Date;                         // 备注
 }
+
+export type LogModel = Log & Document;

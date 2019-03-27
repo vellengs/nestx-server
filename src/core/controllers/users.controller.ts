@@ -3,8 +3,8 @@ import { UsersService } from './users.service';
 import { User } from './../interfaces/user.interface';
 import { AuthGuard } from '@nestjs/passport';
 import { plainToClass } from 'class-transformer';
-import { ResultList } from 'common/interfaces/result.interface';
-import { KeyValueDto, CreateUserRes, EditUserRes } from './../dto';
+import { ResultList } from './../../common/interfaces/result.interface';
+import { KeyValueDto, CreateUserReq, EditUserReq } from './../dto';
 
 @Controller('users')
 @UseGuards(AuthGuard('jwt'))
@@ -18,13 +18,13 @@ export class UsersController {
   }
 
   @Post()
-  async create(@Body() user: CreateUserRes) {
-    return this.usersService.create(plainToClass(CreateUserRes, user));
+  async create(@Body() user: CreateUserReq) {
+    return this.usersService.create(plainToClass(CreateUserReq, user));
   }
 
   @Put()
-  async update(@Body() user: EditUserRes): Promise<User> {
-    return this.usersService.update(plainToClass(EditUserRes, user));
+  async update(@Body() user: EditUserReq): Promise<User> {
+    return this.usersService.update(plainToClass(EditUserReq, user));
   }
 
   @Get('search')

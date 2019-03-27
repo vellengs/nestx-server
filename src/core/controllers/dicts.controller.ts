@@ -1,8 +1,7 @@
-import { Controller, Get, Post, Body, UseGuards, Param, Put, ParseIntPipe, Query, HttpStatus } from '@nestjs/common';
+import { Controller, Get, Post, Body, UseGuards, Param, Put, ParseIntPipe, Query } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { plainToClass } from 'class-transformer';
-import { ResultList } from 'common/interfaces/result.interface';
-import { ApiResponse } from '@nestjs/swagger';
+import { ResultList } from './../../common/interfaces/result.interface';
 import { DictsService } from './dicts.service';
 import { Dict } from './../interfaces/dict.interface';
 import { CreateDictReq, EditDictReq, KeyValueDto } from './../dto';

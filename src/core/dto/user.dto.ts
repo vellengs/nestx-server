@@ -1,17 +1,15 @@
 import { IsString, IsInt, IsEmail, IsOptional } from 'class-validator';
 import { ApiModelProperty } from '@nestjs/swagger';
 
-export class CreateUserRes {
-    @ApiModelProperty()
+export class CreateUserReq {
     @IsString()
     username: string;
-
-    @ApiModelProperty()
+    
     @IsString()
     password: string;
 }
 
-export class EditUserRes {
+export class EditUserReq {
     @IsString()
     name: string;
 

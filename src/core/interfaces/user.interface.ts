@@ -1,6 +1,6 @@
 import { Document } from 'mongoose';
 
-export interface User extends Document {
+export interface User {
   _id: string;
   username: string;
   password: string;
@@ -20,3 +20,5 @@ export interface User extends Document {
   expired: Date; // 有效期
   comparePassword: (password: string, cb: any) => void;
 }
+
+export type UserModel = User & Document;
