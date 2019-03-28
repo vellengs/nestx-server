@@ -18,7 +18,8 @@ export const setupSwagger = (app: INestApplication) => {
     .addBearerAuth(SWAGGER_API_AUTH_NAME, SWAGGER_API_AUTH_LOCATION)
     .setSchemes('http')
     .build();
-  const document = SwaggerModule.createDocument(app, options);
+  // const document = SwaggerModule.createDocument(app, options);
+  const document = require('./swagger.json');
   SwaggerModule.setup(SWAGGER_API_ROOT, app, document);
 };
 

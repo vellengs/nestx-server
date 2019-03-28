@@ -22,7 +22,7 @@ export class AuthService {
     }
   }
 
-  async createToken(payload: LoginDto): Promise<Token> {
+  async createToken(payload: { username: string }): Promise<Token> {
     const accessToken = this.jwtService.sign({ account: payload.username });
     return {
       expiresIn: 3600,
