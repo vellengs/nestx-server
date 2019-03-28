@@ -1,6 +1,6 @@
 {
 	"swagger": {
-		"outputDirectory": "./docs",
+		"outputDirectory": "./dist",
 		"entryFile": "./src/main.ts",
 		"name": "rest api interface",
 		"description": "项目标准接口",

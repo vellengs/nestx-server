@@ -29,8 +29,8 @@ export class UsersController {
 
   @Get('search')
   async search(
-    @Param('keyword') keyword?: string,
-    @Param('value') value?: string,
+    @Query('keyword') keyword?: string,
+    @Query('value') value?: string,
   ): Promise<KeyValueDto[]> {
     return this.usersService.search(keyword, value);
   }
