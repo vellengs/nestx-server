@@ -12,7 +12,7 @@ export class ControllerService<T extends Id> {
     async findAll(
         @Param('index', new ParseIntPipe()) index: number = 1,
         @Param('size', new ParseIntPipe()) size: number = 10,
-        @Query() query): Promise<ResultList<T>> {
+        @Query() query: any): Promise<ResultList<T>> {
         return await this.service.findAll(index, size, query);
     }
 
@@ -32,7 +32,7 @@ export class ControllerService<T extends Id> {
     }
 
     @Delete(':id')
-    async remove(@Param('id') id): Promise<T> {
+    async remove(@Param('id') id: string): Promise<T> {
         return await this.service.remove(id);
     }
 
