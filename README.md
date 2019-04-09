@@ -1,3 +1,8 @@
+# This project deprecated 
+
+move to https://github.com/vellengs/nestx/tree/master/packages/server
+
+
 # nestx server
 Server side for nestx
 ### Quick start
