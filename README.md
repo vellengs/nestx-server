@@ -1,4 +1,4 @@
-# This project deprecated 
+# This project is deprecated 
 
 move to https://github.com/vellengs/nestx/tree/master/packages/server
 
