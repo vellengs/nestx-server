@@ -4,19 +4,19 @@
 			"path": "/Users/xieyunqi/projects/vellengs/nestx-server/app"
 		},
 		{
-			"path": "auth"
+			"path": "packages/auth"
 		},
 		{
-			"path": "cms"
+			"path": "packages/base"
 		},
 		{
-			"path": "common"
+			"path": "packages/cms"
 		},
 		{
-			"path": "config"
+			"path": "packages/common"
 		},
 		{
-			"path": "base"
+			"path": "packages/config"
 		}
 	],
 	"settings": {}

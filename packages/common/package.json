@@ -2,7 +2,7 @@
   "name": "nestx-common",
   "version": "0.0.7",
   "description": "common module of nestx",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "prepublish": "npm run build",
     "build": "tsc -p tsconfig.json",
@@ -27,5 +27,5 @@
     "@types/lodash": "^4.14.123",
     "@types/mongoose": "^5.3.26"
   },
-  "gitHead": "11d6ba4ce23f4c054d7ff13779a2af6c61fc732c"
+  "gitHead": "b1e599bcc22a97771ebcf7c9959624d3b0663c7a"
 }

@@ -2,7 +2,7 @@
   "name": "nestx-cms",
   "version": "0.0.7",
   "description": "base module of nestx",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "prepublish": "npm run build",
     "build": "tsc -p tsconfig.json",
@@ -17,5 +17,5 @@
     "class-validator": "^0.9.1",
     "nest-swagger": "^0.3.0-alpha.0"
   },
-  "gitHead": "11d6ba4ce23f4c054d7ff13779a2af6c61fc732c"
+  "gitHead": "b1e599bcc22a97771ebcf7c9959624d3b0663c7a"
 }
