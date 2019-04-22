@@ -16,7 +16,8 @@
     "express": "^4.16.4",
     "nest-swagger": "^0.3.0-alpha.0",
     "nestx-common": "^0.0.4",
-    "passport-jwt": "^4.0.0"
+    "passport-jwt": "^4.0.0",
+    "rxjs": "^6.4.0"
   },
   "gitHead": "ecea2dad047b0a8323bdcba78b35e8616dc2237d",
   "devDependencies": {

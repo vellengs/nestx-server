@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^3.0.6",
     "class-transformer": "^0.2.0",
     "class-validator": "^0.9.1",
     "express": "^4.16.4",

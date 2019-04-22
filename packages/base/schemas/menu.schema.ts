@@ -1,5 +1,6 @@
-import { Schema, SchemaTypes as t, SchemaOptions } from 'mongoose';
-import { transform } from './../../utils';
+import { Schema, SchemaTypes as t, SchemaOptions } from "mongoose";
+import { utils } from "nestx-common";
+const { transform } = utils;
 
 const option: SchemaOptions = {};
 option.timestamps = true;
@@ -20,27 +21,27 @@ export const MenuSchema = new Schema(
     paths: [
       {
         type: t.ObjectId,
-        ref: 'Menu',
-      },
+        ref: "Menu"
+      }
     ],
     parent: {
       type: t.ObjectId,
-      ref: 'Menu',
+      ref: "Menu"
     },
     permissions: [
       {
         type: t.ObjectId,
-        ref: 'Menu',
-      },
+        ref: "Menu"
+      }
     ],
     isMenu: {
       type: t.Boolean,
-      default: true,
-    },
+      default: true
+    }
   },
-  option,
+  option
 );
 
-MenuSchema.set('toJSON', {
-  transform,
+MenuSchema.set("toJSON", {
+  transform
 });

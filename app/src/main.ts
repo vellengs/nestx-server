@@ -1,4 +1,4 @@
-import { NestFactory, Reflector } from '@nestjs/core';
+import { NestFactory } from '@nestjs/core';
 import { ValidationPipe } from '@nestjs/common';
 import { setupSwagger } from './swagger';
 import * as compression from 'compression';
@@ -16,7 +16,7 @@ async function bootstrap() {
   app.useStaticAssets(join(__dirname, '..', 'public'));
   app.use('/uploads', express.static('uploads'));
   app.use(cookieParser());
-  app.setGlobalPrefix('api'); // TODO
+  app.setGlobalPrefix('api');
   setupSwagger(app);
   app.enableCors();
   app.use(helmet());

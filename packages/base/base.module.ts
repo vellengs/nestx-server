@@ -14,7 +14,12 @@ import {
   ProfileSchema,
   AppearanceSchema
 } from "./schemas";
-import { CoreControllers, CoreServices } from "./controllers";
+import {
+  BaseControllers,
+  BaseServices,
+  AccessManagement,
+  LoggerService
+} from "./controllers";
 
 const models = [
   { name: "Dict", schema: DictSchema },
@@ -32,8 +37,18 @@ const models = [
 
 @Module({
   imports: [MongooseModule.forFeature(models)],
-  controllers: [...CoreControllers],
-  providers: [...CoreServices],
-  exports: [...CoreServices]
+  controllers: [...BaseControllers],
+  providers: [
+    ...BaseServices,
+    {
+      provide: "IAccessManagement",
+      useClass: AccessManagement
+    },
+    {
+      provide: "ILoggerService",
+      useClass: LoggerService
+    }
+  ],
+  exports: [...BaseServices]
 })
 export class BaseModule {}

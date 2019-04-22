@@ -14,7 +14,8 @@
     "@nestjs/passport": "^6.0.0",
     "class-validator": "^0.9.1",
     "dotenv": "^7.0.0",
-    "nest-swagger": "^0.3.0-alpha.0"
+    "nest-swagger": "^0.3.0-alpha.0",
+    "rxjs": "^6.4.0"
   },
   "devDependencies": {
     "@types/dotenv": "^6.1.1"

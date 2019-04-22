@@ -1,18 +1,19 @@
-import { Schema, SchemaTypes as t } from 'mongoose';
-import { transform } from './../../utils';
+import { Schema, SchemaTypes as t } from "mongoose";
+import { utils } from "nestx-common";
+const { transform } = utils;
 export const DictSchema = new Schema(
   {
     category: { type: t.String },
     name: { type: t.String },
     translate: { type: t.String },
-    expand: { type: t.Mixed },
+    expand: { type: t.Mixed }
   },
   {
     timestamps: true,
-    usePushEach: true,
-  },
+    usePushEach: true
+  }
 );
 
-DictSchema.set('toJSON', {
-  transform,
+DictSchema.set("toJSON", {
+  transform
 });

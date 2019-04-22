@@ -1,5 +1,6 @@
 import { Schema, SchemaTypes as t } from 'mongoose';
-import { transform } from './../../utils';
+import { utils } from "nestx-common";
+const { transform } = utils;
 
 export const SettingSchema = new Schema(
   {

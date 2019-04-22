@@ -1,5 +1,6 @@
-import { Schema, SchemaTypes as t } from 'mongoose';
-import { transform } from './../../utils';
+import { Schema, SchemaTypes as t } from "mongoose";
+import { utils } from "nestx-common";
+const { transform } = utils;
 
 export const GroupSchema = new Schema(
   {
@@ -8,14 +9,14 @@ export const GroupSchema = new Schema(
     icon: { type: t.String },
     isRegion: { type: t.Boolean },
     order: { type: t.Number },
-    parent: { type: t.ObjectId, ref: 'Group' },
-    paths: [{ type: t.ObjectId, ref: 'Group' }],
-    director: { type: t.ObjectId, ref: 'User' },
-    description: { type: t.String },
+    parent: { type: t.ObjectId, ref: "Group" },
+    paths: [{ type: t.ObjectId, ref: "Group" }],
+    director: { type: t.ObjectId, ref: "User" },
+    description: { type: t.String }
   },
-  { timestamps: true },
+  { timestamps: true }
 );
 
-GroupSchema.set('toJSON', {
-  transform,
+GroupSchema.set("toJSON", {
+  transform
 });

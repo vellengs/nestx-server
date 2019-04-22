@@ -1,5 +1,6 @@
-import { Schema, SchemaTypes as t, SchemaOptions } from 'mongoose';
-import { transform } from './../../utils';
+import { Schema, SchemaTypes as t, SchemaOptions } from "mongoose";
+import { utils } from "nestx-common";
+const { transform } = utils;
 
 const option: SchemaOptions = {};
 option.timestamps = true;
@@ -10,11 +11,11 @@ export const NoticeSchema = new Schema(
     type: { type: t.String },
     extra: { type: t.String },
     status: { type: t.String },
-    read: { type: t.Boolean },
+    read: { type: t.Boolean }
   },
-  option,
+  option
 );
 
-NoticeSchema.set('toJSON', {
-  transform,
+NoticeSchema.set("toJSON", {
+  transform
 });

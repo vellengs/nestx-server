@@ -1,5 +1,6 @@
-import { Schema, SchemaTypes as t, SchemaOptions } from 'mongoose';
-import { transform } from './../../utils';
+import { Schema, SchemaTypes as t, SchemaOptions } from "mongoose";
+import { utils } from "nestx-common";
+const { transform } = utils;
 
 const option: SchemaOptions = {};
 option.timestamps = true;
@@ -7,30 +8,30 @@ option.timestamps = true;
 export const LogSchema = new Schema(
   {
     name: {
-      type: t.String,
+      type: t.String
     },
     operator: {
-      type: t.String,
+      type: t.String
     },
     ip: {
-      type: t.String,
+      type: t.String
     },
     operation: {
-      type: t.String,
+      type: t.String
     },
     result: {
-      type: t.Number,
+      type: t.Number
     },
     elapsed: {
-      type: t.Number,
+      type: t.Number
     },
     comment: {
-      type: t.String,
-    },
+      type: t.String
+    }
   },
-  option,
+  option
 );
 
-LogSchema.set('toJSON', {
-  transform,
+LogSchema.set("toJSON", {
+  transform
 });

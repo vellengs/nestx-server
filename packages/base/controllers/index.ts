@@ -19,7 +19,7 @@ import { AppearancesService } from "./appearances.service";
 import { AccessManagement } from "./access.management";
 import { LoggerService } from "./logger.service";
 
-export const CoreControllers = [
+export const BaseControllers = [
   DictsController,
   UsersController,
   MenusController,
@@ -31,7 +31,7 @@ export const CoreControllers = [
   AppearancesController
 ];
 
-export const CoreServices = [
+export const BaseServices = [
   DictsService,
   UsersService,
   MenusService,
