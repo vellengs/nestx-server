@@ -1,6 +1,10 @@
-import { Appearance, SchemaTypes as t, WidgetTypes as w } from '../../common';
+import {
+  Appearance,
+  SchemaTypes as t,
+  WidgetTypes as w,
+  SFSchema,
+} from 'nestx-common';
 import { cloneDeep } from 'lodash';
-import { SFSchema } from '../../common';
 
 const addForm: SFSchema = {
   title: '新建用户组',

@@ -3,9 +3,7 @@ import {
   SchemaTypes as t,
   WidgetTypes as w,
   FormDefine,
-} from '../../common/types/appearance';
-import { cloneDeep } from 'lodash';
-import { SFSchema } from '../../common/types/schema.types';
+} from 'nestx-common';
 
 export const appearance: Appearance = {
   columnSets: {

@@ -1,7 +1,7 @@
 import { Controller, Get, Query } from '@nestjs/common';
 import { AppService } from './app.service';
 import { Tags } from 'nest-swagger';
-import { SettingsGroup } from './core/dto';
+import { SettingsGroup } from 'nestx-base';
 
 @Tags('app')
 @Controller()

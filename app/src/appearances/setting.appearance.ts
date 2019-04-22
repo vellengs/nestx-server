@@ -2,10 +2,8 @@ import {
   Appearance,
   SchemaTypes as t,
   WidgetTypes as w,
-  FormDefine,
-} from '../../common/types/appearance';
-import { cloneDeep } from 'lodash';
-import { SFSchema } from '../../common/types/schema.types';
+  SFSchema,
+} from 'nestx-common';
 
 const profile: SFSchema = {
   title: '个人信息',
