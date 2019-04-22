@@ -1,6 +1,6 @@
 {
   "name": "nestx-common",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "common module of nestx",
   "main": "index.js",
   "scripts": {
