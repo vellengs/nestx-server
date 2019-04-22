@@ -1,6 +1,6 @@
 {
   "name": "nestx-base",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "base module of nestx",
   "main": "index.js",
   "scripts": {
@@ -18,8 +18,8 @@
     "lodash": "^4.17.11",
     "mongoose": "^5.5.2",
     "nest-swagger": "^0.3.0-alpha.0",
-    "nestx-auth": "0.0.5",
-    "nestx-common": "0.0.5",
+    "nestx-auth": "^0.0.6",
+    "nestx-common": "^0.0.6",
     "typeorm": "^0.2.16"
   },
   "gitHead": "ecea2dad047b0a8323bdcba78b35e8616dc2237d",
