@@ -1,0 +1,28 @@
+{
+  "name": "nest-common",
+  "version": "0.3.0-alpha.0",
+  "description": "common module of nestx",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@nestjs/common": "^6.1.1",
+    "@nestjs/core": "^6.1.1",
+    "@nestjs/jwt": "^6.0.0",
+    "@nestjs/passport": "^6.0.0",
+    "class-transformer": "^0.2.0",
+    "class-validator": "^0.9.1",
+    "lodash": "^4.17.11",
+    "mongoose": "^5.5.2",
+    "nest-swagger": "^0.3.0-alpha.0",
+    "rxjs": "^6.4.0",
+    "typeorm": "^0.2.16"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.14.123",
+    "@types/mongoose": "^5.3.26"
+  }
+}

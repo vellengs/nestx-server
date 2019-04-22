@@ -1,0 +1,22 @@
+{
+  "name": "nest-config",
+  "version": "0.3.0-alpha.0",
+  "description": "base module of nestx",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@nestjs/common": "^6.1.1",
+    "@nestjs/jwt": "^6.0.0",
+    "@nestjs/passport": "^6.0.0",
+    "class-validator": "^0.9.1",
+    "dotenv": "^7.0.0",
+    "nest-swagger": "^0.3.0-alpha.0"
+  },
+  "devDependencies": {
+    "@types/dotenv": "^6.1.1"
+  }
+}

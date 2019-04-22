@@ -1,0 +1,11 @@
+{
+  "name": "nestx-server",
+  "private": true,
+  "scripts": {
+    "start:serve": "cd packages/server && npm start",
+    "gen": "cd packages/server && npm run swagger"
+  },
+  "devDependencies": {
+    "lerna": "^3.13.1"
+  }
+}
