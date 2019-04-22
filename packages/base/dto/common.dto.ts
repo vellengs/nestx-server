@@ -1,8 +1,8 @@
-import { ApiModelProperty } from "@nestjs/swagger";
+import { IsString } from "class-validator";
 
 export class KeyValueDto {
-    @ApiModelProperty()
-    label: string;
-    @ApiModelProperty()
-    value: string;
+  @IsString()
+  label: string;
+  @IsString()
+  value: string;
 }

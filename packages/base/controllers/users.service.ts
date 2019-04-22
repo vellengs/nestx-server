@@ -1,19 +1,18 @@
-import { Model, Document } from 'mongoose';
-import { Injectable } from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose';
-import { User, UserModel, VeryCodeModel } from './../interfaces';
+import { Model, Document } from "mongoose";
+import { Injectable } from "@nestjs/common";
+import { InjectModel } from "@nestjs/mongoose";
+import { User, UserModel, VeryCodeModel } from "./../interfaces";
 import {
   MongooseService,
   IdentifyEntry,
   ResultList,
-  Result,
-} from 'nestx-common';
-import { RegisterReq } from './../../auth/dto/Register.dto';
-import { ObjectID } from 'typeorm';
-import { EditProfileReq, UserRes, ChangePasswordReq } from './../dto';
-import { ObjectId } from 'bson';
-import { Utils } from 'nestx-common';
-import { omit } from 'lodash';
+  Result
+} from "nestx-common";
+import { RegisterReq } from "./../../auth/dto/Register.dto";
+import { ObjectID } from "typeorm";
+import { EditProfileReq, UserRes, ChangePasswordReq } from "./../dto";
+import { ObjectId } from "bson";
+import { omit } from "lodash";
 
 const FIVE_MINUTES = 5 * 60 * 1000; // 5 mins
 const ONE_MINUTE = 1 * 60 * 1000; // 1 mins
@@ -22,23 +21,23 @@ const SMS_VERIFICATION_CONTENT = `sms template {0}`;
 @Injectable()
 export class UsersService extends MongooseService<UserModel> {
   defaultQueryFields = [
-    'username',
-    'avatar',
-    'email',
-    'name',
-    'mobile',
-    'isAdmin',
-    'isApproved',
-    'expired',
+    "username",
+    "avatar",
+    "email",
+    "name",
+    "mobile",
+    "isAdmin",
+    "isApproved",
+    "expired"
   ];
 
   constructor(
-    @InjectModel('User')
+    @InjectModel("User")
     protected readonly model: Model<UserModel>,
-    @InjectModel('Profile')
+    @InjectModel("Profile")
     protected readonly profileModel: Model<UserModel>,
-    @InjectModel('VeryCode')
-    private readonly veryCodeModel: Model<VeryCodeModel>,
+    @InjectModel("VeryCode")
+    private readonly veryCodeModel: Model<VeryCodeModel>
   ) {
     super(model);
   }
@@ -49,7 +48,7 @@ export class UsersService extends MongooseService<UserModel> {
     role: string,
     page: number,
     size: number,
-    sort: string,
+    sort: string
   ): Promise<ResultList<UserModel>> {
     let groups, roles;
     if (group) {
@@ -63,11 +62,11 @@ export class UsersService extends MongooseService<UserModel> {
       size,
       {
         groups,
-        roles,
+        roles
       },
-      { keyword, field: 'name' },
+      { keyword, field: "name" },
       this.defaultQueryFields,
-      sort,
+      sort
     );
   }
 
@@ -80,7 +79,7 @@ export class UsersService extends MongooseService<UserModel> {
       password,
       username,
       mobile,
-      mobilePrefix,
+      mobilePrefix
     }); // only accept those fields
     return await instance.save();
   }
@@ -117,11 +116,11 @@ export class UsersService extends MongooseService<UserModel> {
         .update(
           {
             _id: {
-              $in: accountId,
-            },
+              $in: accountId
+            }
           },
           { $pullAll: { roles: [role] } },
-          { multi: true },
+          { multi: true }
         )
         .exec();
     }
@@ -138,18 +137,18 @@ export class UsersService extends MongooseService<UserModel> {
         .find(
           {
             _id: {
-              $in: accountIds,
+              $in: accountIds
             },
             roles: {
-              $in: [role],
-            },
+              $in: [role]
+            }
           },
-          { _id: 1 },
+          { _id: 1 }
         )
         .exec();
 
       const exists = (existIds || []).map((item: Document) =>
-        item._id.toString(),
+        item._id.toString()
       );
       const ids = accountIds.filter(id => {
         return exists.indexOf(id) === -1;
@@ -159,11 +158,11 @@ export class UsersService extends MongooseService<UserModel> {
         .update(
           {
             _id: {
-              $in: ids,
-            },
+              $in: ids
+            }
           },
           { $push: { roles: role } },
-          { multi: true },
+          { multi: true }
         )
         .exec();
     }
@@ -173,14 +172,14 @@ export class UsersService extends MongooseService<UserModel> {
 
   async update(
     entry: IdentifyEntry,
-    fields: string[] = this.defaultQueryFields,
+    fields: string[] = this.defaultQueryFields
   ): Promise<UserModel> {
     delete entry.username; // should not change the username;
     const instance = await this.model
       .findOneAndUpdate(
         { _id: entry.id },
         { $set: entry },
-        { upsert: true, fields: this.getFields(fields), new: true },
+        { upsert: true, fields: this.getFields(fields), new: true }
       )
       .exec();
     return instance;
@@ -188,20 +187,20 @@ export class UsersService extends MongooseService<UserModel> {
 
   async changePassword(
     userId: string,
-    entry: ChangePasswordReq,
+    entry: ChangePasswordReq
   ): Promise<Result> {
     const password = entry.newPassword;
 
     if (entry.newPassword != entry.confirm) {
       return {
         ok: false,
-        message: 'passwords no consist',
+        message: "passwords no consist"
       };
     }
 
     const account: any = await this.model
       .findOne({
-        _id: userId,
+        _id: userId
       })
       .exec();
 
@@ -214,7 +213,7 @@ export class UsersService extends MongooseService<UserModel> {
           } else {
             resolve(isMatch);
           }
-        },
+        }
       );
     });
 
@@ -224,12 +223,12 @@ export class UsersService extends MongooseService<UserModel> {
     } else {
       return {
         ok: false,
-        message: 'old password not equal',
+        message: "old password not equal"
       };
     }
 
     return {
-      ok: true,
+      ok: true
     };
   }
 
@@ -237,10 +236,10 @@ export class UsersService extends MongooseService<UserModel> {
     const profileModel = await this.profileModel
       .findOneAndUpdate(
         {
-          _id: userId,
+          _id: userId
         },
         entry,
-        { upsert: true, new: true },
+        { upsert: true, new: true }
       )
       .exec();
 
@@ -248,15 +247,15 @@ export class UsersService extends MongooseService<UserModel> {
     const user = await this.model
       .findOneAndUpdate(
         {
-          _id: userId,
+          _id: userId
         },
         {
           profile,
-          ...entry,
+          ...entry
         },
-        { new: true },
+        { new: true }
       )
-      .populate('profile')
+      .populate("profile")
       .exec();
 
     if (profile) {
@@ -269,7 +268,7 @@ export class UsersService extends MongooseService<UserModel> {
   async getProfile(entry: IdentifyEntry) {
     const user = await this.model
       .findById(entry.id)
-      .populate('profile')
+      .populate("profile")
       .exec();
     return this.plainProfile(user);
   }
@@ -279,20 +278,20 @@ export class UsersService extends MongooseService<UserModel> {
       .findOne({
         mobile,
         lastSent: {
-          $gte: Date.now() - ONE_MINUTE,
-        },
+          $gte: Date.now() - ONE_MINUTE
+        }
       })
       .exec();
-    if (sms && process.env.NODE_ENV !== 'test') {
-      return Promise.reject('Request too often.');
+    if (sms && process.env.NODE_ENV !== "test") {
+      return Promise.reject("Request too often.");
     }
-    if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
+    if (!process.env.NODE_ENV || process.env.NODE_ENV === "development") {
       const date = Date.now();
-      const code = '123456';
+      const code = "123456";
       await new this.veryCodeModel({ mobile, code, lastSent: date }).save();
       return Promise.resolve(code);
     }
-    const code = '123456'; // + require("rander").between(100000, 999999);
+    const code = "123456"; // + require("rander").between(100000, 999999);
     // const content = SMS_VERIFICATION_CONTENT.replace("{0}", code);
     // const result = await callSmsSent(mobile, content);
     // if (!result) return;
@@ -306,8 +305,8 @@ export class UsersService extends MongooseService<UserModel> {
       code,
       mobile,
       lastSent: {
-        $gte: Date.now() - ONE_MINUTE,
-      },
+        $gte: Date.now() - ONE_MINUTE
+      }
     });
     return instance ? true : false;
   }
@@ -320,6 +319,6 @@ export class UsersService extends MongooseService<UserModel> {
     const instance = Object.assign({}, doc, doc.profile);
     instance.id = doc._id;
     instance.createdAt = doc.createdAt;
-    return omit(instance, ['_id', '__v', 'password', 'profile']);
+    return omit(instance, ["_id", "__v", "password", "profile"]);
   }
 }

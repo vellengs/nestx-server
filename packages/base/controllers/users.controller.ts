@@ -9,8 +9,6 @@ import {
   Query,
   Req,
   Delete,
-  UsePipes,
-  ValidationPipe,
   UseInterceptors
 } from "@nestjs/common";
 import { UsersService } from "./users.service";
@@ -67,7 +65,7 @@ export class UsersController {
   @Put("profile")
   async updateProfile(
     @Body() user: EditProfileReq,
-    @Req() req: Express.Request
+    @Req() req: any
   ): Promise<UserRes> {
     return this.usersService.updateProfile(req.user.id, user);
   }
@@ -75,7 +73,7 @@ export class UsersController {
   @Put("password")
   async changePassword(
     @Body() entry: ChangePasswordReq,
-    @Req() req: Express.Request
+    @Req() req: any
   ): Promise<Result> {
     return this.usersService.changePassword(req.user.id, entry);
   }

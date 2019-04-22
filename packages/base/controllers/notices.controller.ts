@@ -6,26 +6,25 @@ import {
   UseGuards,
   Param,
   Put,
-  ParseIntPipe,
   Query,
-  UseInterceptors,
-} from '@nestjs/common';
-import { AuthGuard } from '@nestjs/passport';
-import { plainToClass } from 'class-transformer';
-import { NoticesService } from './notices.service';
-import { Notice } from './../interfaces';
-import { KeyValueDto, CreateNoticeReq, EditNoticeReq } from './../dto';
-import { Tags } from 'nest-swagger';
+  UseInterceptors
+} from "@nestjs/common";
+import { AuthGuard } from "@nestjs/passport";
+import { plainToClass } from "class-transformer";
+import { NoticesService } from "./notices.service";
+import { Notice } from "./../interfaces";
+import { KeyValueDto, CreateNoticeReq, EditNoticeReq } from "./../dto";
+import { Tags } from "nest-swagger";
 import {
   ResultList,
   NullableParseIntPipe,
   RolesGuard,
-  LoggingInterceptor,
-} from 'nestx-common';
+  LoggingInterceptor
+} from "nestx-common";
 
-@Tags('core')
-@Controller('notice')
-@UseGuards(AuthGuard('jwt'), RolesGuard)
+@Tags("core")
+@Controller("notice")
+@UseGuards(AuthGuard("jwt"), RolesGuard)
 @UseInterceptors(LoggingInterceptor)
 export class NoticesController {
   constructor(private readonly noticeService: NoticesService) {}
@@ -40,26 +39,26 @@ export class NoticesController {
     return this.noticeService.update(plainToClass(EditNoticeReq, entry));
   }
 
-  @Get('search')
+  @Get("search")
   async search(
-    @Query('keyword') keyword?: string,
-    @Query('value') value?: string,
+    @Query("keyword") keyword?: string,
+    @Query("value") value?: string
   ): Promise<KeyValueDto[]> {
     return this.noticeService.search(keyword, value);
   }
 
-  @Get('query')
+  @Get("query")
   async query(
-    @Query('keyword') keyword?: string,
-    @Query('page', new NullableParseIntPipe()) page: number = 1,
-    @Query('size', new NullableParseIntPipe()) size: number = 10,
-    @Query('sort') sort?: string,
+    @Query("keyword") keyword?: string,
+    @Query("page", new NullableParseIntPipe()) page: number = 1,
+    @Query("size", new NullableParseIntPipe()) size: number = 10,
+    @Query("sort") sort?: string
   ): Promise<ResultList<Notice>> {
     return this.noticeService.querySearch(keyword, page, size, sort);
   }
 
-  @Get(':id')
-  async findOne(@Param('id') id: string): Promise<Notice> {
+  @Get(":id")
+  async findOne(@Param("id") id: string): Promise<Notice> {
     return this.noticeService.findById(id);
   }
 }

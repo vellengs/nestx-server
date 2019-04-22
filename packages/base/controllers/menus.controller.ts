@@ -19,7 +19,6 @@ import {
   LoggingInterceptor,
   TreeNode
 } from "nestx-common";
-s;
 import { MenusService } from "./menus.service";
 import { Menu } from "./../interfaces";
 import { CreateMenuReq, EditMenuReq, KeyValueDto, MenuRes } from "./../dto";

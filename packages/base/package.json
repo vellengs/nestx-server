@@ -15,7 +15,8 @@
     "lodash": "^4.17.11",
     "mongoose": "^5.5.2",
     "nest-swagger": "^0.3.0-alpha.0",
-    "nestx-common": "^0.0.4"
+    "nestx-common": "0.0.4",
+    "typeorm": "^0.2.16"
   },
   "gitHead": "ecea2dad047b0a8323bdcba78b35e8616dc2237d",
   "devDependencies": {

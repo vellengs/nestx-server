@@ -1,11 +1,11 @@
-import { Model } from 'mongoose';
-import { Injectable } from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose';
-import { LogModel, Log } from './../interfaces';
+import { Model } from "mongoose";
+import { Injectable } from "@nestjs/common";
+import { InjectModel } from "@nestjs/mongoose";
+import { LogModel } from "./../interfaces";
 
 @Injectable()
 export class LoggerService {
-  constructor(@InjectModel('Log') protected readonly model: Model<LogModel>) {}
+  constructor(@InjectModel("Log") protected readonly model: Model<LogModel>) {}
 
   async log(log: {
     controller: string;
@@ -30,7 +30,7 @@ export class LoggerService {
       operation,
       result,
       elapsed,
-      comment,
+      comment
     }).save();
   }
 }
