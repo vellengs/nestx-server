@@ -1,0 +1,23 @@
+{
+	"folders": [
+		{
+			"path": "/Users/xieyunqi/projects/vellengs/nestx-server/app"
+		},
+		{
+			"path": "auth"
+		},
+		{
+			"path": "cms"
+		},
+		{
+			"path": "common"
+		},
+		{
+			"path": "config"
+		},
+		{
+			"path": "base"
+		}
+	],
+	"settings": {}
+}

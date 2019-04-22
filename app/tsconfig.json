@@ -11,13 +11,16 @@
         "target": "es6",
         "sourceMap": true,
         "allowJs": true,
-        "baseUrl": ".",
         "outDir": "dist",
+        "baseUrl": "src",
         "typeRoots": [
             "./node_modules/@types",
-            "./types/"
+            "./src/types/"
         ]
     },
+    "include": [
+        "src/**/*"
+    ],
     "exclude": [
         "node_modules/**/*",
         "dist/**/*",
