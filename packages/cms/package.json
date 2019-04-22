@@ -1,5 +1,5 @@
 {
-  "name": "nest-cms",
+  "name": "nestx-cms",
   "version": "0.0.1",
   "description": "base module of nestx",
   "main": "index.js",
@@ -14,5 +14,6 @@
     "@nestjs/passport": "^6.0.0",
     "class-validator": "^0.9.1",
     "nest-swagger": "^0.3.0-alpha.0"
-  }
+  },
+  "gitHead": "ecea2dad047b0a8323bdcba78b35e8616dc2237d"
 }

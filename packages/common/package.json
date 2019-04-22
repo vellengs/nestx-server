@@ -1,5 +1,5 @@
 {
-  "name": "nest-common",
+  "name": "nestx-common",
   "version": "0.0.1",
   "description": "common module of nestx",
   "main": "index.js",
@@ -24,5 +24,6 @@
   "devDependencies": {
     "@types/lodash": "^4.14.123",
     "@types/mongoose": "^5.3.26"
-  }
+  },
+  "gitHead": "ecea2dad047b0a8323bdcba78b35e8616dc2237d"
 }
