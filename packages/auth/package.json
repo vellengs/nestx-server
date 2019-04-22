@@ -1,6 +1,6 @@
 {
   "name": "nestx-auth",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "auth module of nestx",
   "main": "index.js",
   "scripts": {
@@ -16,7 +16,7 @@
     "class-validator": "^0.9.1",
     "express": "^4.16.4",
     "nest-swagger": "^0.3.0-alpha.0",
-    "nestx-common": "0.0.2",
+    "nestx-common": "^0.0.3",
     "passport-jwt": "^4.0.0"
   },
   "gitHead": "ecea2dad047b0a8323bdcba78b35e8616dc2237d",

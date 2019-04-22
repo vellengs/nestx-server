@@ -1,6 +1,6 @@
 {
   "name": "nestx-config",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "base module of nestx",
   "main": "index.js",
   "scripts": {
