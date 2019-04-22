@@ -8,7 +8,7 @@ import {
   ResultList,
   Result
 } from "nestx-common";
-import { RegisterReq } from "./../../auth/dto/Register.dto";
+import { RegisterReq } from "nestx-auth";
 import { ObjectID } from "typeorm";
 import { EditProfileReq, UserRes, ChangePasswordReq } from "./../dto";
 import { ObjectId } from "bson";

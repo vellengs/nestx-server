@@ -8,7 +8,7 @@ import { JwtService } from "@nestjs/jwt";
 import { JwtPayload, AccessToken, IUserService } from "./interfaces";
 import { LoginReq, LoginRes } from "./dto/login.dto";
 import { RegisterReq } from "./dto/Register.dto";
-import { Result } from "./../common";
+import { Result } from "nestx-common";
 
 @Injectable()
 export class AuthService {

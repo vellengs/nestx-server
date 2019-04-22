@@ -1,7 +1,7 @@
 {
     "compilerOptions": {
         "module": "commonjs",
-        "declaration": false,
+        "declaration": true,
         "noImplicitAny": true,
         "removeComments": true,
         "noLib": false,
@@ -10,9 +10,9 @@
         "experimentalDecorators": true,
         "target": "es6",
         "sourceMap": true,
-        "allowJs": true,
-        "baseUrl": ".",
+        "allowJs": false,
         "outDir": "dist",
+        "baseUrl": "src",
         "typeRoots": [
             "./node_modules/@types",
             "./types/"

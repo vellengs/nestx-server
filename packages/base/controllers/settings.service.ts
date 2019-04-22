@@ -1,9 +1,9 @@
-import { Model } from "mongoose";
 import { Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
 import { MongooseService, ResultList } from "nestx-common";
 import { SettingModel } from "./../interfaces";
 import { SettingsGroup, SettingRes } from "./../dto";
+import { Model } from "mongoose";
 
 @Injectable()
 export class SettingsService extends MongooseService<SettingModel> {

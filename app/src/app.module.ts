@@ -14,7 +14,7 @@ import { BaseModule } from 'nestx-base';
     AuthModule,
     BaseModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  // controllers: [AppController],
+  // providers: [AppService],
 })
 export class AppModule {}
