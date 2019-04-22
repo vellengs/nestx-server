@@ -24,8 +24,7 @@ import {
   GroupModel,
   NoticeModel,
 } from 'nestx-base';
-
-import { MONGODB_URI } from './../utils/secrets';
+import { MONGODB_URI } from 'secret';
 
 export function connect(uri: string) {
   (mongoose as any).Promise = bluebird;
