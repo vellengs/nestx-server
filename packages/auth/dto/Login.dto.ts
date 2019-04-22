@@ -1,5 +1,5 @@
-import { IsNotEmpty, IsString, MinLength, IsOptional } from 'class-validator';
-import { AccessToken } from '../interfaces/jwt-payload.interface';
+import { IsNotEmpty, IsString, MinLength, IsOptional } from "class-validator";
+import { AccessToken } from "../interfaces";
 
 export class LoginReq {
   @IsNotEmpty()
@@ -11,7 +11,7 @@ export class LoginReq {
 
   @IsNotEmpty()
   @MinLength(5, {
-    message: 'Your password is too short! It must be 5 characters or more!',
+    message: "Your password is too short! It must be 5 characters or more!"
   })
   readonly password: string;
 }

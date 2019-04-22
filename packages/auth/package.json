@@ -12,8 +12,15 @@
     "@nestjs/common": "^6.1.1",
     "@nestjs/jwt": "^6.0.0",
     "@nestjs/passport": "^6.0.0",
+    "@types/express": "^4.16.1",
     "class-validator": "^0.9.1",
-    "nest-swagger": "^0.3.0-alpha.0"
+    "express": "^4.16.4",
+    "nest-swagger": "^0.3.0-alpha.0",
+    "nestx-common": "0.0.2",
+    "passport-jwt": "^4.0.0"
   },
-  "gitHead": "ecea2dad047b0a8323bdcba78b35e8616dc2237d"
+  "gitHead": "ecea2dad047b0a8323bdcba78b35e8616dc2237d",
+  "devDependencies": {
+    "@types/passport-jwt": "^3.0.1"
+  }
 }

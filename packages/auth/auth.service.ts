@@ -2,25 +2,25 @@ import {
   Injectable,
   UnauthorizedException,
   NotAcceptableException,
-} from '@nestjs/common';
-import { JwtService } from '@nestjs/jwt';
-import { JwtPayload, AccessToken } from './interfaces/jwt-payload.interface';
-import { LoginReq, LoginRes } from './dto/login.dto';
-import { RegisterReq } from './dto/Register.dto';
-import { UsersService } from './../core/controllers/users.service';
-import { Result } from './../common';
+  Inject
+} from "@nestjs/common";
+import { JwtService } from "@nestjs/jwt";
+import { JwtPayload, AccessToken, IUserService } from "./interfaces";
+import { LoginReq, LoginRes } from "./dto/login.dto";
+import { RegisterReq } from "./dto/Register.dto";
+import { Result } from "./../common";
 
 @Injectable()
 export class AuthService {
   constructor(
     private readonly jwtService: JwtService,
-    private readonly userService: UsersService,
+    @Inject("IUserService") private readonly userService: IUserService
   ) {}
 
   async login(payload: LoginReq): Promise<LoginRes> {
     const user = await this.userService.login(
       payload.username,
-      payload.password,
+      payload.password
     );
     if (user) {
       const token = await this.createToken(user);
@@ -33,7 +33,7 @@ export class AuthService {
         isAdmin,
         isApproved,
         expired,
-        roles,
+        roles
       } = user;
       return {
         token,
@@ -45,7 +45,7 @@ export class AuthService {
         isAdmin,
         isApproved,
         expired,
-        roles,
+        roles
       };
     } else {
       throw new UnauthorizedException();
@@ -53,43 +53,45 @@ export class AuthService {
   }
 
   async logout(): Promise<boolean> {
-    return true; // TODO;
+    return true;
   }
 
   async createToken(payload: { username: string }): Promise<AccessToken> {
     const accessToken = this.jwtService.sign({ account: payload.username });
     return {
       expiresIn: 3600,
-      accessToken,
+      accessToken
     };
   }
 
   async register(payload: RegisterReq): Promise<AccessToken> {
     const validate = await this.userService.verifyCode(
       payload.veryCode,
-      payload.mobile,
+      payload.mobile
     );
     if (!validate) {
-      throw new NotAcceptableException('verycode failure');
+      throw new NotAcceptableException("verycode failure");
     }
-    const user = await this.userService.register(payload).catch(error => {
-      throw new NotAcceptableException(
-        'register failure might duplicate with username, email or mobile.',
-      );
-    });
+    const user = await this.userService
+      .register(payload)
+      .catch((error: any) => {
+        throw new NotAcceptableException(
+          "register failure might duplicate with username, email or mobile."
+        );
+      });
     return await this.createToken(user);
   }
 
   async captcha(mobile: string): Promise<Result> {
     const code = await this.userService.sendVeryCode(mobile);
     return {
-      ok: true,
+      ok: true
     };
   }
 
   async validateUser(payload: JwtPayload) {
     return this.userService.findOne({
-      username: payload.account,
+      username: payload.account
     });
   }
 }
