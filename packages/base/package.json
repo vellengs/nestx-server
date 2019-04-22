@@ -20,9 +20,11 @@
     "nest-swagger": "^0.3.0-alpha.0",
     "nestx-auth": "^0.0.6",
     "nestx-common": "^0.0.6",
+    "nestx-config": "0.0.5",
+    "passport-jwt": "^4.0.0",
     "typeorm": "^0.2.16"
   },
-  "gitHead": "ecea2dad047b0a8323bdcba78b35e8616dc2237d",
+  "gitHead": "11d6ba4ce23f4c054d7ff13779a2af6c61fc732c",
   "devDependencies": {
     "@nestjs/common": "^6.1.1",
     "@nestjs/core": "^6.1.1",

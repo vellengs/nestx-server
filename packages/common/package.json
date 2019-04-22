@@ -27,5 +27,5 @@
     "@types/lodash": "^4.14.123",
     "@types/mongoose": "^5.3.26"
   },
-  "gitHead": "ecea2dad047b0a8323bdcba78b35e8616dc2237d"
+  "gitHead": "11d6ba4ce23f4c054d7ff13779a2af6c61fc732c"
 }
