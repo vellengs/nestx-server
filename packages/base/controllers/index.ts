@@ -44,3 +44,26 @@ export const CoreServices = [
   AccessManagement,
   LoggerService
 ];
+
+export {
+  DictsController,
+  UsersController,
+  MenusController,
+  LogsController,
+  NoticesController,
+  SettingsController,
+  RolesController,
+  GroupsController,
+  AppearancesController,
+  DictsService,
+  UsersService,
+  MenusService,
+  LogsService,
+  NoticesService,
+  SettingsService,
+  RolesService,
+  GroupsService,
+  AppearancesService,
+  AccessManagement,
+  LoggerService
+};
