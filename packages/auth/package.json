@@ -5,7 +5,7 @@
   "main": "dist/index.js",
   "scripts": {
     "prepublish": "npm run build",
-    "build": "tsc -p tsconfig.json",
+    "build": "rimraf dist && tsc -p tsconfig.json",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -14,6 +14,7 @@
     "@nestjs/common": "^6.1.1",
     "@nestjs/jwt": "^6.0.0",
     "@nestjs/passport": "^6.0.0",
+    "@nestjs/platform-express": "^6.1.1",
     "@types/bson": "^4.0.0",
     "bson": "^4.0.2",
     "class-validator": "^0.9.1",
@@ -21,10 +22,11 @@
     "express": "^4.16.4",
     "mongoose": "^5.5.2",
     "nest-swagger": "^0.3.0-alpha.0",
-    "nestx-common": "^0.0.11",
-    "nestx-config": "^0.0.11",
+    "nestx-common": "0.0.11",
+    "nestx-config": "0.0.11",
     "passport": "^0.4.0",
     "passport-jwt": "^4.0.0",
+    "reflect-metadata": "^0.1.13",
     "rxjs": "^6.4.0"
   },
   "gitHead": "56e54eb712aa27194f4d1356c5219a09f7734f95",
@@ -35,6 +37,7 @@
     "@types/mongoose": "^5.3.26",
     "@types/passport-jwt": "^3.0.1",
     "install": "^0.12.2",
-    "npm": "^6.9.0"
+    "npm": "^6.9.0",
+    "rimraf": "^2.6.3"
   }
 }

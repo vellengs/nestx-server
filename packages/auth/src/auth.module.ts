@@ -29,14 +29,22 @@ export const defaultMeta = {
   providers: [AuthService, JwtStrategy]
 };
 
-@Module(defaultMeta)
+@Module({})
 export class AuthModule {
   static registerAsync(options: ModuleMetadata): DynamicModule {
+    const imports = [...defaultMeta.imports, ...(options.imports || [])];
+    const providers = [...defaultMeta.providers, ...(options.providers || [])];
+    const controllers = [
+      ...defaultMeta.controllers,
+      ...(options.controllers || [])
+    ];
+
+    console.log("providers...:", providers);
     return {
-      imports: [...defaultMeta.imports, ...(options.imports || [])],
+      imports,
       module: AuthModule,
-      controllers: [...defaultMeta.controllers, ...(options.controllers || [])],
-      providers: [...defaultMeta.providers, ...(options.providers || [])]
+      controllers,
+      providers
     };
   }
 }
