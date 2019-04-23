@@ -1,16 +1,16 @@
 import { Module } from '@nestjs/common';
-import { AuthModule } from 'nestx-auth';
-import { MockUserService } from 'nestx-auth/dist/mock.user.service';
+import { BaseModule } from 'nestx-base';
+import { MongooseModule } from '@nestjs/mongoose';
+
+const mongodbUri = 'mongodb://localhost/nestx-server-test';
+
 @Module({
   imports: [
-    AuthModule.registerAsync({
-      providers: [
-        {
-          provide: 'IUserService',
-          useClass: MockUserService,
-        },
-      ],
+    MongooseModule.forRoot(mongodbUri, {
+      useCreateIndex: true,
+      useNewUrlParser: true,
     }),
+    BaseModule,
   ],
 })
 export class AppModule {}
