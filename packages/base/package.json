@@ -25,7 +25,7 @@
     "passport-jwt": "^4.0.0",
     "typeorm": "^0.2.16"
   },
-  "gitHead": "b1e599bcc22a97771ebcf7c9959624d3b0663c7a",
+  "gitHead": "56e54eb712aa27194f4d1356c5219a09f7734f95",
   "devDependencies": {
     "@nestjs/common": "^6.1.1",
     "@nestjs/core": "^6.1.1",
