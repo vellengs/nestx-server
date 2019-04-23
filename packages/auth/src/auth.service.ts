@@ -8,7 +8,6 @@ import { JwtService } from "@nestjs/jwt";
 import { JwtPayload, AccessToken, IUserService } from "./interfaces";
 import { LoginReq, LoginRes } from "./dto/login.dto";
 import { RegisterReq } from "./dto/Register.dto";
-import { Result } from "nestx-common";
 
 @Injectable()
 export class AuthService {
@@ -82,7 +81,7 @@ export class AuthService {
     return await this.createToken(user);
   }
 
-  async captcha(mobile: string): Promise<Result> {
+  async captcha(mobile: string): Promise<{ ok: boolean }> {
     const code = await this.userService.sendVeryCode(mobile);
     return {
       ok: true

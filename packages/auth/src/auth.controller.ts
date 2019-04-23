@@ -4,7 +4,6 @@ import { AccessToken } from "./interfaces";
 import { LoginReq, LoginRes } from "./dto/Login.dto";
 import { RegisterReq } from "./dto/Register.dto";
 import { Tags } from "nest-swagger";
-import { Result } from "nestx-common";
 @Tags("auth")
 @Controller("auth")
 export class AuthController {
@@ -26,7 +25,9 @@ export class AuthController {
   async logout(
     @Req() request: Express.Request,
     @Res() res: any
-  ): Promise<Result> {
+  ): Promise<{
+    ok: boolean;
+  }> {
     await this.authService.logout();
     res.clearCookie("access_token");
     return res.json({
@@ -35,7 +36,11 @@ export class AuthController {
   }
 
   @Get("captcha")
-  async captcha(@Query("mobile") mobile: string): Promise<Result> {
+  async captcha(
+    @Query("mobile") mobile: string
+  ): Promise<{
+    ok: boolean;
+  }> {
     await this.authService.captcha(mobile);
     return {
       ok: true

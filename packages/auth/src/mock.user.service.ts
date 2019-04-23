@@ -1,5 +1,4 @@
 import { IUserService } from "./interfaces";
-import { Result } from "nestx-common";
 import { RegisterReq } from "./dto/Register.dto";
 
 export class MockUserService implements IUserService {
@@ -11,7 +10,11 @@ export class MockUserService implements IUserService {
     return { username: "string" };
   }
 
-  async sendVeryCode(mobile: string): Promise<Result> {
+  async sendVeryCode(
+    mobile: string
+  ): Promise<{
+    ok: boolean;
+  }> {
     return {
       ok: true
     };
@@ -26,5 +29,4 @@ export class MockUserService implements IUserService {
       username: "hi"
     };
   }
-  
 }

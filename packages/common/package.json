@@ -15,8 +15,6 @@
     "@nestjs/core": "^6.1.1",
     "@nestjs/jwt": "^6.0.0",
     "@nestjs/passport": "^6.0.0",
-    "class-transformer": "^0.2.0",
-    "class-validator": "^0.9.1",
     "lodash": "^4.17.11",
     "mongoose": "^5.5.2",
     "nest-swagger": "^0.3.0-alpha.0",
@@ -26,7 +24,9 @@
   },
   "devDependencies": {
     "@types/lodash": "^4.14.123",
-    "@types/mongoose": "^5.3.26"
+    "@types/mongoose": "^5.3.26",
+    "class-transformer": "^0.2.0",
+    "class-validator": "^0.9.1"
   },
   "gitHead": "56e54eb712aa27194f4d1356c5219a09f7734f95"
 }

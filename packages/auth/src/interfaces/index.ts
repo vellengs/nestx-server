@@ -1,4 +1,3 @@
-import { Result } from "nestx-common";
 import { RegisterReq } from "../dto";
 
 export interface JwtPayload {
@@ -13,7 +12,11 @@ export interface AccessToken {
 export declare class IUserService {
   verifyCode: (code: string, mobile: string) => Promise<boolean>;
   register: (payload: RegisterReq) => Promise<{ username: string }>;
-  sendVeryCode: (mobile: string) => Promise<Result>;
+  sendVeryCode: (
+    mobile: string
+  ) => Promise<{
+    ok: boolean;
+  }>;
   findOne: (conditions?: { [key: string]: any }) => Promise<any>;
   login: (username: string, password: string) => Promise<any>;
 }
