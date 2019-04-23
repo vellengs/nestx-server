@@ -10,53 +10,52 @@ import {
   UploadedFiles,
   Logger,
   UploadedFile,
-  Body,
-} from '@nestjs/common';
-import { Tags } from 'nest-swagger';
-import { MediaService } from './media.service';
+  Body
+} from "@nestjs/common";
+import { Tags } from "nest-swagger";
+import { MediaService } from "./media.service";
 import {
   CreateMediaDto,
   MediaRes,
   EditMediaDto,
   UploadRes,
   UploadMultipleRes,
-  MediaFile,
-} from '../dto';
-import { NullableParseIntPipe, ResultList } from '../../common';
-import { Media } from '../interfaces';
-import { KeyValueDto } from '../../core/dto';
-import { FilesInterceptor, FileInterceptor } from '@nestjs/platform-express';
-@Tags('cms')
-@Controller('media')
+  MediaFile
+} from "../dto";
+import { NullableParseIntPipe, ResultList, KeyValue } from "nestx-common";
+import { Media } from "../interfaces";
+import { FilesInterceptor, FileInterceptor } from "@nestjs/platform-express";
+@Tags("cms")
+@Controller("media")
 export class MediaController {
   constructor(private readonly service: MediaService) {}
 
-  @Get('search')
+  @Get("search")
   async search(
-    @Query('keyword') keyword?: string,
-    @Query('value') value?: string,
-  ): Promise<KeyValueDto[]> {
+    @Query("keyword") keyword?: string,
+    @Query("value") value?: string
+  ): Promise<KeyValue[]> {
     return this.service.search(keyword, value);
   }
 
-  @Post('upload')
-  @UseInterceptors(FileInterceptor('file'))
+  @Post("upload")
+  @UseInterceptors(FileInterceptor("file"))
   async uploadFile(@UploadedFile() file: MediaFile): Promise<UploadRes> {
     return {
       ok: true,
-      file: file.path,
+      file: file.path
     };
   }
 
-  @Post('uploads')
-  @UseInterceptors(FilesInterceptor('files'))
+  @Post("uploads")
+  @UseInterceptors(FilesInterceptor("files"))
   async uploadFiles(
-    @UploadedFiles() files?: MediaFile[],
+    @UploadedFiles() files?: MediaFile[]
   ): Promise<UploadMultipleRes> {
     const fileNames = (files || []).map(item => item.path);
     return {
       ok: true,
-      files: fileNames,
+      files: fileNames
     };
   }
 
@@ -70,23 +69,23 @@ export class MediaController {
     return this.service.update(entry);
   }
 
-  @Get('query')
+  @Get("query")
   async query(
-    @Query('keyword') keyword?: string,
-    @Query('page', new NullableParseIntPipe()) page: number = 1,
-    @Query('size', new NullableParseIntPipe()) size: number = 10,
-    @Query('sort') sort?: string,
+    @Query("keyword") keyword?: string,
+    @Query("page", new NullableParseIntPipe()) page: number = 1,
+    @Query("size", new NullableParseIntPipe()) size: number = 10,
+    @Query("sort") sort?: string
   ): Promise<ResultList<MediaRes>> {
     return this.service.querySearch(keyword, page, size, sort);
   }
 
-  @Delete(':id')
-  async remove(@Param('id') id: string): Promise<boolean> {
+  @Delete(":id")
+  async remove(@Param("id") id: string): Promise<boolean> {
     return this.service.remove(id);
   }
 
-  @Get(':id')
-  async findOne(@Param('id') id: string): Promise<Media> {
+  @Get(":id")
+  async findOne(@Param("id") id: string): Promise<Media> {
     return this.service.findById(id);
   }
 }

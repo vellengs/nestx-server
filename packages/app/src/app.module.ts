@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { BaseModule } from 'nestx-base';
 import { MongooseModule } from '@nestjs/mongoose';
-
+import { cm} from 'nestx-cms';
 const mongodbUri = 'mongodb://localhost/nestx-server-test';
 
 @Module({
@@ -11,6 +11,7 @@ const mongodbUri = 'mongodb://localhost/nestx-server-test';
       useNewUrlParser: true,
     }),
     BaseModule,
+    
   ],
 })
 export class AppModule {}
