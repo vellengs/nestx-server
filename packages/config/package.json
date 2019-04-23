@@ -14,7 +14,6 @@
     "@nestjs/common": "^6.1.1",
     "@nestjs/jwt": "^6.0.0",
     "@nestjs/passport": "^6.0.0",
-    "class-validator": "^0.9.1",
     "dotenv": "^7.0.0",
     "nest-swagger": "^0.3.0-alpha.0",
     "reflect-metadata": "^0.1.13",

@@ -64,4 +64,6 @@ const models = [
   ],
   exports: [...BaseServices]
 })
-export class BaseModule {}
+export class BaseModule {
+  // provider config settings to set services;
+}
