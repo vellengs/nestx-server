@@ -1,6 +1,5 @@
-import { IUserService } from "./interfaces";
+import { IUserService, RegisterReq } from "nestx-auth";
 import { Result } from "nestx-common";
-import { RegisterReq } from "./dto/Register.dto";
 
 export class MockUserService implements IUserService {
   async verifyCode(code: string, mobile: string): Promise<boolean> {
@@ -26,5 +25,4 @@ export class MockUserService implements IUserService {
       username: "hi"
     };
   }
-  
 }
