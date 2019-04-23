@@ -1,6 +1,6 @@
 {
   "name": "nestx-cms",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "description": "base module of nestx",
   "main": "dist/index.js",
   "scripts": {
@@ -20,9 +20,9 @@
     "dotenv": "^7.0.0",
     "express": "^4.16.4",
     "nest-swagger": "^0.3.0-alpha.0",
-    "nestx-auth": "0.0.11",
-    "nestx-common": "0.0.11",
-    "nestx-config": "0.0.11",
+    "nestx-auth": "^0.0.12",
+    "nestx-common": "^0.0.12",
+    "nestx-config": "^0.0.12",
     "passport": "^0.4.0",
     "passport-jwt": "^4.0.0",
     "reflect-metadata": "^0.1.13",
