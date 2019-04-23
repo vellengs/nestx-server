@@ -1,6 +1,6 @@
 {
   "name": "nestx-auth",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "auth module of nestx",
   "main": "dist/index.js",
   "scripts": {
@@ -21,8 +21,8 @@
     "express": "^4.16.4",
     "mongoose": "^5.5.2",
     "nest-swagger": "^0.3.0-alpha.0",
-    "nestx-common": "^0.0.10",
-    "nestx-config": "^0.0.10",
+    "nestx-common": "^0.0.11",
+    "nestx-config": "^0.0.11",
     "passport": "^0.4.0",
     "passport-jwt": "^4.0.0",
     "rxjs": "^6.4.0"
