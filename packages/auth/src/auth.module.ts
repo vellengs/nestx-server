@@ -33,10 +33,10 @@ export const defaultMeta = {
 export class AuthModule {
   static registerAsync(options: ModuleMetadata): DynamicModule {
     return {
-      imports: [...defaultMeta.imports, ...options.imports],
+      imports: [...defaultMeta.imports, ...(options.imports || [])],
       module: AuthModule,
-      controllers: [...defaultMeta.controllers, ...options.controllers],
-      providers: [...defaultMeta.providers, ...options.providers]
+      controllers: [...defaultMeta.controllers, ...(options.controllers || [])],
+      providers: [...defaultMeta.providers, ...(options.providers || [])]
     };
   }
 }

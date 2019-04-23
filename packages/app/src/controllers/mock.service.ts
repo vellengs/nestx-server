@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Installer } from './../../scripts/data.install';
+import { Installer } from './../scripts/data.install';
 import { InjectModel } from '@nestjs/mongoose';
 import { UserModel } from 'nestx-base';
 import { Model } from 'mongoose';

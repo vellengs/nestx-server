@@ -7,12 +7,12 @@ import {
 } from "@nestjs/common";
 import { tap } from "rxjs/operators";
 import { Reflector } from "@nestjs/core";
-import { ILoggerServices, IUser } from "../interfaces";
+import { ILoggerService, IUser } from "../interfaces";
 
 @Injectable()
 export class LoggingInterceptor implements NestInterceptor {
   constructor(
-    @Inject("ILoggerServices") private readonly logger: ILoggerServices,
+    @Inject("ILoggerService") private readonly logger: ILoggerService,
     private readonly reflector: Reflector
   ) {}
 

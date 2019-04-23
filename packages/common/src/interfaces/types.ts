@@ -38,7 +38,7 @@ export interface IAccessManagement {
   ) => Promise<boolean>;
 }
 
-export interface ILoggerServices {
+export interface ILoggerService {
   log: (option: {
     ip: string;
     elapsed: number;

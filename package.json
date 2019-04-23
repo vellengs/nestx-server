@@ -7,9 +7,5 @@
   },
   "devDependencies": {
     "lerna": "^3.13.1"
-  },
-  "dependencies": {
-    "nestx-common": "0.0.5",
-    "nestx-config": "0.0.5"
   }
 }

@@ -61,10 +61,6 @@ const models = [
     {
       provide: "ILoggerService",
       useClass: LoggerService
-    },
-    {
-      provide: "IUserService",
-      useClass: UsersService
     }
   ],
   exports: [...BaseServices]

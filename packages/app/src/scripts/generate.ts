@@ -1,6 +1,6 @@
 import { NestFactory } from '@nestjs/core';
-import { AppModule } from './../src/app.module';
-import { createDocument } from './../src/swagger';
+import { AppModule } from './../app.module';
+import { createDocument } from './../swagger';
 import { writeFileSync } from 'fs';
 
 async function generate() {
