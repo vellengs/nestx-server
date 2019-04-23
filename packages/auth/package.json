@@ -1,6 +1,6 @@
 {
   "name": "nestx-auth",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "auth module of nestx",
   "main": "dist/index.js",
   "scripts": {

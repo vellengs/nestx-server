@@ -1,9 +1,6 @@
 {
 	"folders": [
 		{
-			"path": "/Users/xieyunqi/projects/vellengs/nestx-server/app"
-		},
-		{
 			"path": "packages/auth"
 		},
 		{
@@ -17,6 +14,9 @@
 		},
 		{
 			"path": "packages/config"
+		},
+		{
+			"path": "packages/app"
 		}
 	],
 	"settings": {}

@@ -1,21 +1,24 @@
-import { Module } from "@nestjs/common";
+import { Module, DynamicModule } from "@nestjs/common";
 import { JwtModule } from "@nestjs/jwt";
 import { PassportModule } from "@nestjs/passport";
 import { AuthController } from "./auth.controller";
 import { AuthService } from "./auth.service";
 import { JwtStrategy } from "./jwt.strategy";
 import { ConfigModule, ConfigService } from "nestx-config";
-@Module({
+import { ModuleMetadata } from "@nestjs/common/interfaces";
+import { JWT_SECRET_KEY, JWT_ALGORITHM, JWT_EXPIRE_IN } from "./constants";
+
+export const defaultMeta = {
   imports: [
     PassportModule.register({ defaultStrategy: "jwt", session: true }),
     JwtModule.registerAsync({
       imports: [ConfigModule],
       useFactory: async (configService: ConfigService) => {
         return {
-          secretOrPrivateKey: configService.get("JWT_SECRET_KEY"),
+          secretOrPrivateKey: configService.get(JWT_SECRET_KEY),
           signOptions: {
-            algorithm: configService.get("JWT_ALGORITHM"),
-            expiresIn: configService.get("JWT_EXPIRE_IN")
+            algorithm: configService.get(JWT_ALGORITHM),
+            expiresIn: configService.get(JWT_EXPIRE_IN)
           }
         };
       },
@@ -24,5 +27,16 @@ import { ConfigModule, ConfigService } from "nestx-config";
   ],
   controllers: [AuthController],
   providers: [AuthService, JwtStrategy]
-})
-export class AuthModule {}
+};
+
+@Module(defaultMeta)
+export class AuthModule {
+  static registerAsync(options: ModuleMetadata): DynamicModule {
+    return {
+      imports: [...defaultMeta.imports, ...options.imports],
+      module: AuthModule,
+      controllers: [...defaultMeta.controllers, ...options.controllers],
+      providers: [...defaultMeta.providers, ...options.providers]
+    };
+  }
+}

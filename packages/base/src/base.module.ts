@@ -18,8 +18,11 @@ import {
   BaseControllers,
   BaseServices,
   AccessManagement,
-  LoggerService
+  LoggerService,
+  UsersService
 } from "./controllers";
+import { AuthModule } from "nestx-auth";
+import { defaultMeta } from "nestx-auth/dist/auth.module";
 
 const models = [
   { name: "Dict", schema: DictSchema },
@@ -36,7 +39,18 @@ const models = [
 ];
 
 @Module({
-  imports: [MongooseModule.forFeature(models)],
+  imports: [
+    MongooseModule.forFeature(models),
+    AuthModule.registerAsync({
+      imports: [BaseModule],
+      providers: [
+        {
+          provide: "IUserService",
+          useClass: UsersService
+        }
+      ]
+    })
+  ],
   controllers: [...BaseControllers],
   providers: [
     ...BaseServices,
@@ -47,6 +61,10 @@ const models = [
     {
       provide: "ILoggerService",
       useClass: LoggerService
+    },
+    {
+      provide: "IUserService",
+      useClass: UsersService
     }
   ],
   exports: [...BaseServices]

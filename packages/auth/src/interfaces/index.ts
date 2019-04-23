@@ -10,7 +10,7 @@ export interface AccessToken {
   accessToken: string;
 }
 
-export interface IUserService {
+export declare class IUserService {
   verifyCode: (code: string, mobile: string) => Promise<boolean>;
   register: (payload: RegisterReq) => Promise<{ username: string }>;
   sendVeryCode: (mobile: string) => Promise<Result>;
