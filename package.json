@@ -7,5 +7,9 @@
   },
   "devDependencies": {
     "lerna": "^3.13.1"
+  },
+  "dependencies": {
+    "@nestjs/core": "^6.1.1",
+    "@nestjs/platform-express": "^6.1.1"
   }
 }

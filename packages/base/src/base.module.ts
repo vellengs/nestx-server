@@ -22,7 +22,6 @@ import {
   UsersService
 } from "./controllers";
 import { AuthModule } from "nestx-auth";
-import { defaultMeta } from "nestx-auth/dist/auth.module";
 
 const models = [
   { name: "Dict", schema: DictSchema },
